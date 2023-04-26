@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="borderPaneLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleEnter" prefHeight="600.0" prefWidth="800.0" stylesheets="@../Css/Main_Css.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.LoginController">
+   <top>
+      <AnchorPane styleClass="Top-Bar" BorderPane.alignment="CENTER_RIGHT">
+         <children>
+            <HBox layoutX="442.0" layoutY="-25.0" prefHeight="50.0" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Button fx:id="btnMinimize" mnemonicParsing="false" onAction="#handleMinimize" prefHeight="50.0" prefWidth="50.0" styleClass="Top-Bar-Button" text="_" />
+                  <Button fx:id="btnMaximized" mnemonicParsing="false" onAction="#handleMaximized" prefHeight="50.0" prefWidth="50.0" styleClass="Top-Bar-Button" text="[]" />
+                  <Button fx:id="BtnClose" mnemonicParsing="false" onAction="#handleClose" prefHeight="50.0" prefWidth="50.0" styleClass="Top-Bar-Button" text="X" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="188.0" fitWidth="300.0" layoutX="80.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="50.0">
+               <image>
+                  <Image url="@../Images/WUAVlogo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefWidth="400.0" styleClass="Login-pane" stylesheets="@../Css/Main_Css.css" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="txtUsername" layoutX="50.0" layoutY="214.0" prefHeight="40.0" prefWidth="300.0" />
+            <Label layoutX="50.0" layoutY="174.0" styleClass="Login-label" text="Brugernavn">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label layoutX="50.0" layoutY="259.0" styleClass="Login-label" text="Adgangskode">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="28.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnLogin" layoutX="50.0" layoutY="392.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" prefWidth="300.0" styleClass="Login-Button" text="Log ind">
+               <font>
+                  <Font name="Berlin Sans FB Demi Bold" size="20.0" />
+               </font>
+            </Button>
+            <PasswordField fx:id="txtPassword" layoutX="50.0" layoutY="300.0" prefHeight="40.0" prefWidth="300.0" />
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
