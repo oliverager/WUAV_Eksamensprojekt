@@ -7,10 +7,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseConnector {
-    private static final String PROP_FILE = ".idea/Config/DataBase.Settings";
+    private static final String PROP_FILE = "config/database.settings";
     private SQLServerDataSource ds;
 
     public DatabaseConnector() throws IOException {
@@ -34,5 +35,16 @@ public class DatabaseConnector {
 
     public Connection getConnection() throws SQLServerException {
         return ds.getConnection();
+    }
+
+    public static void main(String[] args) throws SQLException, IOException {
+
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+
+        try (Connection connection = databaseConnector.getConnection()) {
+
+            System.out.println("Is it open? " + !connection.isClosed());
+
+        } //Connection gets closed here
     }
 }
