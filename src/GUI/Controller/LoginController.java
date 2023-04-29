@@ -1,5 +1,9 @@
 package GUI.Controller;
 
+import BE.UserType.Admin;
+import BE.UserType.ProjectManager;
+import BE.UserType.SalesPerson;
+import BE.UserType.Technician;
 import GUI.Util.ExceptionHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,11 +32,33 @@ public class LoginController extends BaseController {
     private ExceptionHandler exceptionHandler;
 
     @FXML
-    void handleLogin(ActionEvent event) {
+    void handleLogin() {
         try {
-            openMenuView();
-            Stage stage = (Stage) BtnLogin.getScene().getWindow();
-            stage.close();
+            String username = txtUsername.getText();
+            String password = txtPassword.getText();
+            getModelsHandler().getLoginModel().loginAction(username, password);
+            Admin admin = getModelsHandler().getLoginModel().getLoggedInAdmin();
+            Technician technician = getModelsHandler().getLoginModel().getLoggedInTechnician();
+            ProjectManager pm = getModelsHandler().getLoginModel().getLoggedInProjectManager();
+            SalesPerson sp = getModelsHandler().getLoginModel().getLoggedInSalesPerson();
+            if (admin != null) {
+                openMenuView();
+                Stage stage = (Stage) BtnLogin.getScene().getWindow();
+                stage.close();
+            } else if (technician != null) {
+                openMenuView();
+                Stage stage = (Stage) BtnLogin.getScene().getWindow();
+                stage.close();
+            } else if (pm != null) {
+                openMenuView();
+                Stage stage = (Stage) BtnLogin.getScene().getWindow();
+                stage.close();
+            } else if (sp != null) {
+                openMenuView();
+                Stage stage = (Stage) BtnLogin.getScene().getWindow();
+                stage.close();
+            }
+
         }catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.WARNING,"Incorrect username or password, please try again");
             alert.showAndWait();
@@ -71,7 +97,7 @@ public class LoginController extends BaseController {
 
     public void handleEnter(KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.ENTER)){
-            //handleLogin();
+            handleLogin();
         }
     }
     private void dragScreen(){
