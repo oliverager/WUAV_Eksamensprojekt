@@ -61,6 +61,8 @@ public class LoginController extends BaseController {
 
         }catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.WARNING,"Incorrect username or password, please try again");
+            txtPassword.clear();
+            txtUsername.clear();
             alert.showAndWait();
         }
 
@@ -95,9 +97,9 @@ public class LoginController extends BaseController {
         dragScreen();
     }
 
-    public void handleEnter(KeyEvent keyEvent) {
+    public void handleEnter(KeyEvent keyEvent) throws IOException {
         if (keyEvent.getCode().equals(KeyCode.ENTER)){
-            handleLogin();
+            openMenuView();
         }
     }
     private void dragScreen(){

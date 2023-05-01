@@ -20,7 +20,7 @@ public class LoginDAO_DB implements ILoginDAO {
 
     @Override
     public User LoginUser(String UserName, String Password) throws Exception {
-        String sql = "SELECT * FROM [User] Where UserName=?";
+        String sql = "SELECT * FROM [User] Where UserName = ?";
         User user = null;
         try (Connection connection = dbConnector.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)){
@@ -30,11 +30,11 @@ public class LoginDAO_DB implements ILoginDAO {
 
             while (resultSet.next()) {
 
+                int id = resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
                 String PassWord = resultSet.getString("PassWord");
                 String userName = resultSet.getString("UserName");
                 int userTypes = resultSet.getInt("UserType");
-                int id = resultSet.getInt("Id");
 
                 user = new User(name,PassWord,userName,userTypes,id);
             }
