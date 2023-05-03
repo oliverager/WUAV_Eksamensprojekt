@@ -23,8 +23,4 @@ public interface IAdminDAO {
     List<Integer> getUsersWorkingOnProject(Project project) throws Exception;
 
     void deleteProjectRelations(Project project) throws Exception;
-
-    void deleteFromWorkingOnProject(User user, Project project) throws Exception;
-
-    void assignProjectToUser(User user, Project project) throws Exception;
 }

@@ -1,27 +1,40 @@
 package BE;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 public class Project {
 
+    private int projectid;
     private String name;
+    private LocalDate date;
     private String layout;
     private String description;
     private String Images;
-    private int projectid;
-    private int customerid;
     private int techniciansid;
+    private int customerid;
 
-    public Project(String name, String layout, String description, String images, int projectid, int customerid, int techniciansid) {
+    public Project(int projectid, String name, LocalDate date, String layout, String description, String images, int techniciansid, int customerid) {
+        this.projectid = projectid;
         this.name = name;
+        this.date = date;
         this.layout = layout;
         this.description = description;
         Images = images;
-        this.projectid = projectid;
-        this.customerid = customerid;
         this.techniciansid = techniciansid;
+        this.customerid = customerid;
+    }
+
+    public int getProjectid() {
+        return projectid;
     }
 
     public String getName() {
         return name;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
     public String getLayout() {
@@ -36,28 +49,24 @@ public class Project {
         return Images;
     }
 
-    public int getProjectid() {
-        return projectid;
+    public int getTechniciansid() {
+        return techniciansid;
     }
 
     public int getCustomerid() {
         return customerid;
     }
 
-    public int getTechniciansid() {
-        return techniciansid;
-    }
-
     @Override
     public String toString() {
         return "Project{" +
-                "name='" + name + '\'' +
+                "projectid=" + projectid +
+                ", name='" + name + '\'' +
                 ", layout='" + layout + '\'' +
                 ", description='" + description + '\'' +
                 ", Images='" + Images + '\'' +
-                ", projectid=" + projectid +
-                ", customerid=" + customerid +
                 ", techniciansid=" + techniciansid +
+                ", customerid=" + customerid +
                 '}';
     }
 }

@@ -47,14 +47,4 @@ public class AdminDAO_DB implements IAdminDAO {
     public void deleteProjectRelations(Project project) throws Exception {
 
     }
-
-    @Override
-    public void deleteFromWorkingOnProject(User user, Project project) throws Exception {
-
-    }
-
-    @Override
-    public void assignProjectToUser(User user, Project project) throws Exception {
-
-    }
 }

@@ -1,5 +1,6 @@
 package GUI.Model;
 
+import BE.Project;
 import BE.UserType.User;
 import BE.UserType.UserType;
 import BLL.AdminManager;
@@ -7,6 +8,7 @@ import BLL.Interfaces.IAdminManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,19 +17,18 @@ public class AdminModel {
     private List<User> allUsers;
     private ObservableList<User> userObservableList;
     private ObservableList<User> currentProjectTechnician;
-
     public ObservableList<User> getCurrentProjectTechnician() {
         return currentProjectTechnician;
     }
-    public AdminModel() throws Exception {
+    public ObservableList<User> getUserObservableList() {
+        return userObservableList;
+    }
+
+    public AdminModel() throws IOException {
         adminManager = new AdminManager();
         allUsers = new ArrayList<>();
         userObservableList = FXCollections.observableArrayList();
         currentProjectTechnician = FXCollections.observableArrayList();
-    }
-
-    public ObservableList<User> getUserObservableList() {
-        return userObservableList;
     }
     public void createUser(User user) throws Exception {
         User newUser = adminManager.createUser(user);
@@ -39,7 +40,6 @@ public class AdminModel {
         allUsers.remove(user);
         adminManager.deleteUser(user);
     }
-
     public List<User> getAllUsers() {
         return allUsers;
     }
@@ -68,10 +68,6 @@ public class AdminModel {
         }
         return null;
     }
-
-    /**
-     * Clears the search query of Users.
-     */
     public void clearSearch() {
         userObservableList.clear();
         userObservableList.addAll(allUsers);
@@ -80,5 +76,15 @@ public class AdminModel {
     public List<UserType> getAllUserTypes() throws Exception{
         return adminManager.getAllUserTypes();
     }
-
+    public void deleteProject(Project project) throws Exception {
+        adminManager.deleteProjectRelations(project);
+    }
+    public List<User> getUsersWorkingOnProject(Project project) throws Exception{
+        List<User> allUsersOnEvent = new ArrayList<>();
+        List<Integer> allUsersId = adminManager.getUsersWorkingOnProject(project);
+        for (Integer i:allUsersId){
+            allUsersOnEvent.add(getLocalUserFromId(i));
+        }
+        return allUsersOnEvent;
+    }
 }

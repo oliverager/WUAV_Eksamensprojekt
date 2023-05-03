@@ -24,8 +24,4 @@ public interface IAdminManager {
 
     void deleteProjectRelations(Project project) throws Exception;
 
-    void deleteFromWorkingOnProject(User user, Project project) throws Exception;
-
-    void assignProjectToUser(User user, Project project) throws Exception;
-
 }

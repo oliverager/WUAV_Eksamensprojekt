@@ -5,6 +5,7 @@ import BE.Project;
 import BE.UserType.Technician;
 import BLL.Interfaces.IProjectManagerManager;
 import DAL.DB.ProjectManagerDAO_DB;
+import DAL.DatabaseConnector;
 import DAL.Interface.IProjectManagerDAO;
 
 import java.io.IOException;

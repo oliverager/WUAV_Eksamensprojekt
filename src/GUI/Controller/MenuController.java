@@ -1,5 +1,6 @@
 package GUI.Controller;
 
+import BE.Project;
 import GUI.Model.ModelsHandler;
 import GUI.Util.ExceptionHandler;
 import javafx.event.ActionEvent;
@@ -8,12 +9,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 public class MenuController extends BaseController {
@@ -30,17 +33,17 @@ public class MenuController extends BaseController {
     @FXML
     private TextField txtSearchBar;
     @FXML
-    private TableColumn<?, ?> tbcActive;
+    private TableColumn<Project, String> tbcActive;
     @FXML
-    private TableColumn<?, ?> tbcCustomer;
+    private TableColumn<Project, String> tbcCustomer;
     @FXML
-    private TableColumn<?, ?> tbcDate;
+    private TableColumn<Project, LocalDate> tbcDate;
     @FXML
-    private TableColumn<?, ?> tbcId;
+    private TableColumn<Project, Integer> tbcId;
     @FXML
-    private TableColumn<?, ?> tbcName;
+    private TableColumn<Project, String> tbcName;
     @FXML
-    private TableView<?> tbvProject;
+    private TableView<Project> tbvProject;
 
     private Alert alert;
 
@@ -69,7 +72,6 @@ public class MenuController extends BaseController {
         Stage stage = (Stage) btnLogOut.getScene().getWindow();
         stage.close();
     }
-
     @FXML
     public void handleLogOut(ActionEvent event) {
         try{
@@ -104,8 +106,6 @@ public class MenuController extends BaseController {
             ExceptionHandler.displayError(new Exception("Failed to logout please try again", e));}
 
     }
-
-
     private void dragScreen(){
         borderPaneMenu.setOnMousePressed(pressEvent -> {
             borderPaneMenu.setOnMouseDragged(dragEvent -> {
@@ -117,13 +117,21 @@ public class MenuController extends BaseController {
     @Override
     public void setup() {
         dragScreen();
+
+        tbcId.setCellValueFactory(new PropertyValueFactory<Project, Integer>("id"));
+        tbcName.setCellValueFactory(new PropertyValueFactory<Project, String>("name"));
+        tbcDate.setCellValueFactory(new PropertyValueFactory<Project, LocalDate>("date"));
+        tbcCustomer.setCellValueFactory(new PropertyValueFactory<Project, String>("customer"));
+        tbcActive.setCellValueFactory(new PropertyValueFactory<Project, String>("active"));
+
+        tbvProject.setItems(getModelsHandler().getPmModel().getProjectObservableList());
+
     }
 
     public void handleMinimize(ActionEvent actionEvent) {
         Stage stage = (Stage) btnMinimize.getScene().getWindow();
         stage.setIconified(true);
     }
-
     public void handleMaximized(ActionEvent actionEvent) {
         Stage stage = (Stage) btnMaximized.getScene().getWindow();
         if (stage.isMaximized()) {
@@ -142,7 +150,7 @@ public class MenuController extends BaseController {
             getModelsHandler().getAdminModel().clearSearch();
         }
     }
-
     public void handleSearch(KeyEvent keyEvent) {
+        search();
     }
 }

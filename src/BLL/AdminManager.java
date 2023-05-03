@@ -56,14 +56,4 @@ public class AdminManager implements IAdminManager {
     public void deleteProjectRelations(Project project) throws Exception {
         databaseAcces.deleteProjectRelations(project);
     }
-
-    @Override
-    public void deleteFromWorkingOnProject(User user, Project project) throws Exception {
-        databaseAcces.deleteFromWorkingOnProject(user, project);
-    }
-
-    @Override
-    public void assignProjectToUser(User user, Project project) throws Exception {
-        databaseAcces.assignProjectToUser(user, project);
-    }
 }
