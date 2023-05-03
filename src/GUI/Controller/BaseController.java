@@ -2,6 +2,8 @@ package GUI.Controller;
 
 import GUI.Model.ModelsHandler;
 
+import java.io.IOException;
+
 public abstract class BaseController {
 
     private ModelsHandler modelsHandler;
@@ -14,5 +16,5 @@ public abstract class BaseController {
         return modelsHandler;
     }
 
-    public abstract void setup();
+    public abstract void setup() throws IOException;
 }

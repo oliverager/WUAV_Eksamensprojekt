@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="GUI.Controller.MenuController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="750.0" prefWidth="800.0" stylesheets="@../Css/Main_Css.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MenuController">
+   <children>
+      <Label styleClass="Title" text="Opret nyt projekt" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0" />
+      <TextField fx:id="txtProjectName" layoutX="51.0" layoutY="200.0" prefWidth="300.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="160.0" />
+      <Label layoutX="50.0" layoutY="159.0" styleClass="Text_Label" text="Projekt Navn" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="120.0" />
+      <DatePicker fx:id="txtDate" layoutX="51.0" layoutY="338.0" prefWidth="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="360.0" />
+      <Label layoutX="60.0" layoutY="130.0" styleClass="Text_Label" text="Projekt Data" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="320.0" />
+      <Label layoutX="60.0" layoutY="330.0" styleClass="Text_Label" text="Kunde" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="220.0" />
+      <TextField fx:id="txtAutoCustomer" layoutX="50.0" layoutY="264.0" prefWidth="300.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="260.0" />
+   </children>
 </AnchorPane>

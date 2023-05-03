@@ -78,3 +78,7 @@
     -fx-border-color: #E84911;
     -fx-cursor: hand;
 }
+.Text_Label {
+    -fx-font-size: 20px;
+    -fx-font-family: 'Russo One', sans-serif;
+}

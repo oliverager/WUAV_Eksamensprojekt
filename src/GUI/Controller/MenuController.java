@@ -1,5 +1,6 @@
 package GUI.Controller;
 
+import BE.Customer.Customer;
 import BE.Project;
 import GUI.Model.ModelsHandler;
 import GUI.Util.ExceptionHandler;
@@ -12,14 +13,24 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Optional;
 
 public class MenuController extends BaseController {
+    @FXML
+    private TextField txtAutoCustomer;
+    @FXML
+    private DatePicker txtDate;
+    @FXML
+    private TextField txtProjectName;
     @FXML
     private Label lblUsertype;
     @FXML
@@ -47,9 +58,20 @@ public class MenuController extends BaseController {
 
     private Alert alert;
 
-    @FXML
-    public void handleButton1(ActionEvent event) {
+    private AutoCompletionBinding<Customer> customerAutoCompletionBinding;
 
+
+    private void openCreateProjectView() throws IOException {
+        AnchorPane view = FXMLLoader.load(getClass().getResource("GUI/View/CreateProjectView.fxml"));
+        borderPaneMenu.setCenter(view);
+    }
+    private void openSeeAllProjectView() throws IOException {
+        AnchorPane view = FXMLLoader.load(getClass().getResource("GUI/View/SeeAllProjectView.fxml"));
+        borderPaneMenu.setCenter(view);
+    }
+    @FXML
+    public void handleButton1(ActionEvent event) throws IOException {
+        openCreateProjectView();
     }
 
     @FXML
@@ -115,14 +137,16 @@ public class MenuController extends BaseController {
         });
     }
     @Override
-    public void setup() {
+    public void setup() throws IOException {
         dragScreen();
 
-        tbcId.setCellValueFactory(new PropertyValueFactory<Project, Integer>("id"));
-        tbcName.setCellValueFactory(new PropertyValueFactory<Project, String>("name"));
-        tbcDate.setCellValueFactory(new PropertyValueFactory<Project, LocalDate>("date"));
-        tbcCustomer.setCellValueFactory(new PropertyValueFactory<Project, String>("customer"));
-        tbcActive.setCellValueFactory(new PropertyValueFactory<Project, String>("active"));
+        openSeeAllProjectView();
+
+        tbcId.setCellValueFactory(new PropertyValueFactory<Project, Integer>("Id"));
+        tbcName.setCellValueFactory(new PropertyValueFactory<Project, String>("Projekt"));
+        tbcCustomer.setCellValueFactory(new PropertyValueFactory<Project, String>("Kunde"));
+        tbcDate.setCellValueFactory(new PropertyValueFactory<Project, LocalDate>("Data"));
+        tbcActive.setCellValueFactory(new PropertyValueFactory<Project, String>("Aktivere"));
 
         tbvProject.setItems(getModelsHandler().getPmModel().getProjectObservableList());
 

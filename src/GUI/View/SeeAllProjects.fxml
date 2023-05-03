@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="750.0" prefWidth="800.0" stylesheets="@../Css/Main_Css.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MenuController">
+   <children>
+      <Label layoutX="176.0" layoutY="142.0" styleClass="Title" text="Dit nuværende Projekter" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0" />
+      <TableView fx:id="tbvProject" layoutX="60.0" layoutY="160.0" prefWidth="700.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="150.0">
+         <columns>
+            <TableColumn fx:id="tbcId" prefWidth="100.0" text="Id" />
+            <TableColumn fx:id="tbcName" prefWidth="200.0" text="Projekt" />
+            <TableColumn fx:id="tbcCustomer" prefWidth="200.0" text="Kunde" />
+            <TableColumn fx:id="tbcDate" prefWidth="100.0" text="Data" />
+            <TableColumn fx:id="tbcActive" prefWidth="100.0" text="Aktivere" />
+         </columns>
+      </TableView>
+      <TextField fx:id="txtSearchBar" layoutX="550.0" layoutY="113.0" onKeyPressed="#handleSearch" prefHeight="36.0" prefWidth="200.0" promptText="Søgeord..." />
+   </children>
+</AnchorPane>
