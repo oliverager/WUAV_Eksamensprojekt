@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="borderPaneMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../Css/Main_Css.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MenuController">
@@ -17,7 +18,7 @@
                <children>
                   <Button fx:id="btnMinimize" mnemonicParsing="false" onAction="#handleMinimize" prefHeight="50.0" prefWidth="50.0" styleClass="Top-Bar-Button" text="_" />
                   <Button fx:id="btnMaximized" mnemonicParsing="false" onAction="#handleMaximized" prefHeight="50.0" prefWidth="50.0" styleClass="Top-Bar-Button" text="[]" />
-                  <Button fx:id="BtnClose" mnemonicParsing="false" onAction="#handleClose" prefHeight="50.0" prefWidth="50.0" styleClass="Top-Bar-Button" text="X" />
+                  <Button fx:id="btnClose" mnemonicParsing="false" onAction="#handleClose" prefHeight="50.0" prefWidth="50.0" styleClass="Top-Bar-Button" text="X" />
                </children>
             </HBox>
             <Button fx:id="btnLogOut" layoutX="14.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleLogOut" styleClass="Top-Bar-Button-LogOut" text="Log ud" underline="true" />
@@ -35,7 +36,7 @@
                         <Image url="@../Images/WuavLogoWhite.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btn1" mnemonicParsing="false" onAction="#handleButton1" prefHeight="100.0" prefWidth="200.0" styleClass="Nav-bar-Button" text="Button" />
+                  <Button fx:id="btn1" mnemonicParsing="false" onAction="#handleButton1" prefHeight="100.0" prefWidth="200.0" styleClass="Nav-bar-Button" text="Opret nyt Projekt" />
                   <Button fx:id="btn2" mnemonicParsing="false" onAction="#handleButton2" prefHeight="100.0" prefWidth="200.0" styleClass="Nav-bar-Button" text="Button" />
                   <Button fx:id="btn3" mnemonicParsing="false" onAction="#handleButton3" prefHeight="100.0" prefWidth="200.0" styleClass="Nav-bar-Button" text="Button" />
                   <Button fx:id="btn4" mnemonicParsing="false" onAction="#handleButton4" prefHeight="100.0" prefWidth="200.0" styleClass="Nav-bar-Button" text="Button" />
@@ -44,4 +45,11 @@
          </children>
       </AnchorPane>
    </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane fx:id="contentArea" layoutX="188.0" layoutY="211.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>

@@ -1,7 +1,5 @@
 package GUI.Controller;
 
-import BE.Customer.Customer;
-import BE.Project;
 import GUI.Model.ModelsHandler;
 import GUI.Util.ExceptionHandler;
 import javafx.event.ActionEvent;
@@ -10,64 +8,45 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
-import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MenuController extends BaseController {
     @FXML
-    private TextField txtAutoCustomer;
-    @FXML
-    private DatePicker txtDate;
-    @FXML
-    private TextField txtProjectName;
+    private StackPane contentArea;
     @FXML
     private Label lblUsertype;
     @FXML
-    private Button BtnClose,BtnLogOut,btnMinimize,btnMaximized;
+    private Button btnClose, btnLogOut, btnMinimize, btnMaximized;
     @FXML
     private BorderPane borderPaneMenu;
     @FXML
-    private Button btn1,btn2,btn3,btn4;
-    @FXML
-    private Button btnLogOut;
-    @FXML
-    private TextField txtSearchBar;
-    @FXML
-    private TableColumn<Project, String> tbcActive;
-    @FXML
-    private TableColumn<Project, String> tbcCustomer;
-    @FXML
-    private TableColumn<Project, LocalDate> tbcDate;
-    @FXML
-    private TableColumn<Project, Integer> tbcId;
-    @FXML
-    private TableColumn<Project, String> tbcName;
-    @FXML
-    private TableView<Project> tbvProject;
+    private Button btn1, btn2, btn3, btn4;
 
     private Alert alert;
 
-    private AutoCompletionBinding<Customer> customerAutoCompletionBinding;
 
 
     private void openCreateProjectView() throws IOException {
-        AnchorPane view = FXMLLoader.load(getClass().getResource("GUI/View/CreateProjectView.fxml"));
-        borderPaneMenu.setCenter(view);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/GUI/View/CreateProjectView.fxml"));
+        Parent view = loader.load();
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(view);
     }
     private void openSeeAllProjectView() throws IOException {
-        AnchorPane view = FXMLLoader.load(getClass().getResource("GUI/View/SeeAllProjectView.fxml"));
-        borderPaneMenu.setCenter(view);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/GUI/View/SeeAllProjectView.fxml"));
+        Parent view = loader.load();
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(view);
     }
     @FXML
     public void handleButton1(ActionEvent event) throws IOException {
@@ -89,11 +68,7 @@ public class MenuController extends BaseController {
 
     }
 
-    @FXML
-    public void handleClose(ActionEvent event) {
-        Stage stage = (Stage) btnLogOut.getScene().getWindow();
-        stage.close();
-    }
+
     @FXML
     public void handleLogOut(ActionEvent event) {
         try{
@@ -126,7 +101,22 @@ public class MenuController extends BaseController {
 
         } catch (Exception e) {
             ExceptionHandler.displayError(new Exception("Failed to logout please try again", e));}
+    }
 
+    @Override
+    public void setup() {
+        dragScreen();
+        try {
+            openSeeAllProjectView();
+        } catch (IOException ex) {
+            Logger.getLogger(ModuleLayer.Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    public void handleClose(ActionEvent event) {
+        Stage stage = (Stage) btnClose.getScene().getWindow();
+        stage.close();
     }
     private void dragScreen(){
         borderPaneMenu.setOnMousePressed(pressEvent -> {
@@ -136,26 +126,12 @@ public class MenuController extends BaseController {
             });
         });
     }
-    @Override
-    public void setup() throws IOException {
-        dragScreen();
-
-        openSeeAllProjectView();
-
-        tbcId.setCellValueFactory(new PropertyValueFactory<Project, Integer>("Id"));
-        tbcName.setCellValueFactory(new PropertyValueFactory<Project, String>("Projekt"));
-        tbcCustomer.setCellValueFactory(new PropertyValueFactory<Project, String>("Kunde"));
-        tbcDate.setCellValueFactory(new PropertyValueFactory<Project, LocalDate>("Data"));
-        tbcActive.setCellValueFactory(new PropertyValueFactory<Project, String>("Aktivere"));
-
-        tbvProject.setItems(getModelsHandler().getPmModel().getProjectObservableList());
-
-    }
-
+    @FXML
     public void handleMinimize(ActionEvent actionEvent) {
         Stage stage = (Stage) btnMinimize.getScene().getWindow();
         stage.setIconified(true);
     }
+    @FXML
     public void handleMaximized(ActionEvent actionEvent) {
         Stage stage = (Stage) btnMaximized.getScene().getWindow();
         if (stage.isMaximized()) {
@@ -165,16 +141,5 @@ public class MenuController extends BaseController {
         }
 
     }
-    private void search() {
-        String search = txtSearchBar.getText().toLowerCase();
 
-        if(search != null)
-            getModelsHandler().getAdminModel().searchUsers(search);
-        else if (search == null){
-            getModelsHandler().getAdminModel().clearSearch();
-        }
-    }
-    public void handleSearch(KeyEvent keyEvent) {
-        search();
-    }
 }
