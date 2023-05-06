@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -37,17 +38,23 @@ public class MenuController extends BaseController {
 
 
     private void openCreateProjectView() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/GUI/View/CreateProjectView.fxml"));
-        Parent view = loader.load();
+        Parent view = FXMLLoader.load(getClass().getResource("GUI/View/CreateProjectView.fxml"));
         contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(view);
+        contentArea.getChildren().add(view);
     }
     private void openSeeAllProjectView() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/GUI/View/SeeAllProjectView.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("src/GUI/View/SeeAllProjectView.fxml"));
         Parent view = loader.load();
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
+
+    public void openImage() throws IOException{
+        ImageView image = new ImageView("GUI/Images/WUAVlogo.png");
+        contentArea.getChildren().add(image);
+    }
+
     @FXML
     public void handleButton1(ActionEvent event) throws IOException {
         openCreateProjectView();
@@ -107,7 +114,7 @@ public class MenuController extends BaseController {
     public void setup() {
         dragScreen();
         try {
-            openSeeAllProjectView();
+            openImage();
         } catch (IOException ex) {
             Logger.getLogger(ModuleLayer.Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
