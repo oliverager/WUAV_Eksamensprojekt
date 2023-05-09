@@ -3,7 +3,14 @@ package BE.UserType;
 public class Technician extends User {
     //DEFAULT TECHNICIAN usertype = 2
 
-    public Technician(String name, String username, String password, int userid) {
-        super(name, username, password, 2, userid);
+    public Technician(int userId, String passWord, String userName, String name) {
+        super(userId, passWord, userName, name, 2);
     }
+
+    public Technician(String passWord, String userName, String name) {
+        super(passWord, userName, name, 2);
+    }
+
+
+
 }

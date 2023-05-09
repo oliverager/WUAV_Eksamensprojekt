@@ -18,17 +18,30 @@ public class LoginModel {
         loginManager = new LoginManager();
     }
 
+    /**
+     *
+     * @param Username
+     * @param Password
+     * @throws Exception
+     */
     public void loginAction(String Username, String Password) throws Exception {
         User user = loginManager.LoginUser(Username,Password);
-        switch (user.getUsertype()) {
-            case 1 : loggedInAdmin = new Admin(user.getName(), user.getUsername(), user.getPassword(), user.getUserid());
-            break;
-            case 2 : loggedInTechnician = new Technician(user.getName(), user.getUsername(), user.getPassword(), user.getUserid());
-            break;
-            case 3 : loggedInProjectManager = new ProjectManager(user.getName(), user.getUsername(), user.getPassword(), user.getUserid());
-            break;
-            case 4 : loggedInSalesPerson = new SalesPerson(user.getName(), user.getUsername(), user.getPassword(), user.getUserid());
-            break;
+        if (user.getUserType() == 1 )
+        {
+            System.out.println("Admin");
+            loggedInAdmin = new Admin(user.getUserId(), user.getPassWord(), user.getUserName(), user.getName());
+        } else if (user.getUserType() == 2)
+        {
+            System.out.println("Technician");
+            loggedInTechnician = new Technician(user.getUserId(), user.getPassWord(), user.getUserName(), user.getName());
+        } else if (user.getUserType() == 3)
+        {
+            System.out.println("ProjectManager");
+            loggedInProjectManager = new ProjectManager(user.getUserId(), user.getPassWord(), user.getUserName(), user.getName());
+        } else if (user.getUserType() == 4)
+        {
+            System.out.println("SalesPerson");
+            loggedInSalesPerson = new SalesPerson(user.getUserId(), user.getPassWord(), user.getUserName(), user.getName());
         }
     }
 

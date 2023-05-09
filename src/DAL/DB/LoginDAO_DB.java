@@ -31,12 +31,12 @@ public class LoginDAO_DB implements ILoginDAO {
             while (resultSet.next()) {
 
                 int id = resultSet.getInt("Id");
-                String name = resultSet.getString("Name");
                 String PassWord = resultSet.getString("PassWord");
                 String userName = resultSet.getString("UserName");
+                String name = resultSet.getString("Name");
                 int userTypes = resultSet.getInt("UserType");
 
-                user = new User(name,PassWord,userName,userTypes,id);
+                user = new User(id, PassWord, userName, name, userTypes);
             }
             return user;
         }

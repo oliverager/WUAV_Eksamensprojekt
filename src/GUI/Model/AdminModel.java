@@ -63,7 +63,7 @@ public class AdminModel {
 
     public User getLocalUserFromId(int id){
         for (User u: allUsers){
-            if (u.getUserid() == id)
+            if (u.getUserId() == id)
                 return u;
         }
         return null;

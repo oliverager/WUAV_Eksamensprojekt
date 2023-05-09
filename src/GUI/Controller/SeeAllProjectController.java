@@ -2,6 +2,7 @@ package GUI.Controller;
 
 import BE.Project;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -9,9 +10,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
-public class SeeAllProjectController extends BaseController {
+public class SeeAllProjectController extends BaseController implements Initializable {
     @FXML
     private TextField txtSearchBar;
     @FXML
@@ -49,5 +52,10 @@ public class SeeAllProjectController extends BaseController {
     }
     public void handleSearch(KeyEvent keyEvent) {
         search();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
     }
 }

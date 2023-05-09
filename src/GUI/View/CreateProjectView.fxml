@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0"
-      prefWidth="800.0" stylesheets="@../Css/Main_Css.css" xmlns="http://javafx.com/javafx/19"
+      prefWidth="800.0" xmlns="http://javafx.com/javafx/19"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateProjectController">
    <children>
       <Label layoutX="50.0" layoutY="50.0" styleClass="Title" text="Opret nyt projekt" />

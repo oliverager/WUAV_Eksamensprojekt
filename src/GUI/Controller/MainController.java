@@ -1,5 +1,6 @@
 package GUI.Controller;
 
+import BE.UserType.User;
 import GUI.Model.ModelsHandler;
 import GUI.Util.ExceptionHandler;
 import javafx.event.ActionEvent;
@@ -9,7 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -17,10 +18,8 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class MenuController extends BaseController {
+public class MainController extends BaseController {
     @FXML
     private StackPane contentArea;
     @FXML
@@ -43,7 +42,7 @@ public class MenuController extends BaseController {
         contentArea.getChildren().setAll(view);
     }
     private void openSeeAllProjectView() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/GUI/View/SeeAllProjectView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/GUI/View/SeeAllProjectsView.fxml"));
         Parent view = loader.load();
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
@@ -106,12 +105,60 @@ public class MenuController extends BaseController {
     @Override
     public void setup() {
         dragScreen();
+
         try {
-            openSeeAllProjectView();
-        } catch (IOException ex) {
-            Logger.getLogger(ModuleLayer.Controller.class.getName()).log(Level.SEVERE, null, ex);
+            checkUserAndSetup();
+            grantingAccess();
+            //openCreateProjectView();
+            //openSeeAllProjectView();
+        } catch (Exception e) {
+            e.printStackTrace();
+           // throw new RuntimeException(e);
         }
     }
+
+    private void checkUserAndSetup() throws Exception {
+        if(getModelsHandler().getLoginModel().getLoggedInAdmin() != null) {
+            setupAdmin();
+        }
+        else if (getModelsHandler().getLoginModel().getLoggedInProjectManager() != null) {
+            setupProjectManager();
+        }
+        else if (getModelsHandler().getLoginModel().getLoggedInTechnician() != null) {
+            setupTechnician();
+        }
+        else if (getModelsHandler().getLoginModel().getLoggedInSalesPerson() != null) {
+            setupSalesPerson();
+        }
+    }
+    private void grantingAccess() {
+        if (getModelsHandler().getLoginModel().getLoggedInTechnician() != null) {
+            boolean userAccess = false;
+            int loggedInUserId = getModelsHandler().getLoginModel().getLoggedInTechnician().getUserId();
+            for (User u : getModelsHandler().getPmModel().getCurrentProjectTechnician()) {
+                if (u.getUserId() == loggedInUserId) {
+                    userAccess = true;
+                }
+            }
+            if (!userAccess){
+
+            }
+        }
+    }
+
+    private void setupAdmin() {
+        lblUsertype.setText("Admin");
+    }
+    private void setupProjectManager() {
+        lblUsertype.setText("Projekt Manager");
+    }
+    private void setupTechnician() {
+        lblUsertype.setText("Tekniker");
+    }
+    private void setupSalesPerson() {
+        lblUsertype.setText("Sælger");
+    }
+
 
     @FXML
     public void handleClose(ActionEvent event) {
@@ -141,5 +188,4 @@ public class MenuController extends BaseController {
         }
 
     }
-
 }
