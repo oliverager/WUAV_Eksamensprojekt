@@ -1,5 +1,6 @@
 package GUI.Controller;
 
+import BE.UserType.User;
 import GUI.Model.ModelsHandler;
 import GUI.Util.ExceptionHandler;
 import javafx.event.ActionEvent;
@@ -9,8 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -18,10 +18,8 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class MenuController extends BaseController {
+public class MainController extends BaseController {
     @FXML
     private StackPane contentArea;
     @FXML
@@ -32,29 +30,38 @@ public class MenuController extends BaseController {
     private BorderPane borderPaneMenu;
     @FXML
     private Button btn1, btn2, btn3, btn4;
-
     private Alert alert;
 
-
-
     private void openCreateProjectView() throws IOException {
-        Parent view = FXMLLoader.load(getClass().getResource("GUI/View/CreateProjectView.fxml"));
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().add(view);
-    }
-    private void openSeeAllProjectView() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("src/GUI/View/SeeAllProjectView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateProjectView.fxml"));
         Parent view = loader.load();
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
-
-    public void openImage() throws IOException{
-        ImageView image = new ImageView("GUI/Images/WUAVlogo.png");
-        contentArea.getChildren().add(image);
+    private void openSeeAllProjectView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/SeeAllProjectsView.fxml"));
+        Parent view = loader.load();
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(view);
     }
-
+    private void openCreateUserView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateUserView.fxml"));
+        Parent view = loader.load();
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(view);
+    }
+    private void openCreateCustomerView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateCustomerView.fxml"));
+        Parent view = loader.load();
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(view);
+    }
+    private void openProjectView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/ProjectView.fxml"));
+        Parent view = loader.load();
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(view);
+    }
     @FXML
     public void handleButton1(ActionEvent event) throws IOException {
         openCreateProjectView();
@@ -113,12 +120,66 @@ public class MenuController extends BaseController {
     @Override
     public void setup() {
         dragScreen();
+
         try {
-            openImage();
-        } catch (IOException ex) {
-            Logger.getLogger(ModuleLayer.Controller.class.getName()).log(Level.SEVERE, null, ex);
+            checkUserAndSetup();
+            grantingAccess();
+            openSeeAllProjectView();
+        } catch (Exception e) {
+            e.printStackTrace();
+
         }
     }
+
+    private void checkUserAndSetup() throws Exception {
+        if(getModelsHandler().getLoginModel().getLoggedInAdmin() != null) {
+            setupAdmin();
+        }
+        else if (getModelsHandler().getLoginModel().getLoggedInProjectManager() != null) {
+            setupProjectManager();
+        }
+        else if (getModelsHandler().getLoginModel().getLoggedInTechnician() != null) {
+            setupTechnician();
+        }
+        else if (getModelsHandler().getLoginModel().getLoggedInSalesPerson() != null) {
+            setupSalesPerson();
+        }
+    }
+    private void grantingAccess() {
+        if (getModelsHandler().getLoginModel().getLoggedInTechnician() != null) {
+            boolean userAccess = false;
+            int loggedInUserId = getModelsHandler().getLoginModel().getLoggedInTechnician().getUserId();
+            for (User u : getModelsHandler().getPmModel().getCurrentProjectTechnician()) {
+                if (u.getUserId() == loggedInUserId) {
+                    userAccess = true;
+                }
+            }
+            if (!userAccess){
+
+            }
+        }
+    }
+
+    private void setupAdmin() {
+        lblUsertype.setText("Admin");
+        btn1.setText("Opret ny Bruger");
+        btn2.setDisable(true);
+        btn2.setVisible(false);
+        btn3.setDisable(true);
+        btn3.setVisible(false);
+        btn4.setDisable(true);
+        btn4.setVisible(false);
+    }
+    private void setupProjectManager() {
+        lblUsertype.setText("Projekt Manager");
+    }
+    private void setupTechnician() {
+        lblUsertype.setText("Tekniker");
+    }
+    private void setupSalesPerson() {
+        lblUsertype.setText("Sælger");
+    }
+
 
     @FXML
     public void handleClose(ActionEvent event) {
@@ -148,5 +209,4 @@ public class MenuController extends BaseController {
         }
 
     }
-
 }

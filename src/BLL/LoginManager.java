@@ -14,8 +14,16 @@ public class LoginManager implements ILoginManager {
     public LoginManager() throws IOException {
         loginDAO = new LoginDAO_DB();
     }
+
+    /**
+     * Sends two Strings to the Dal layer and gets an Admin object that contains matching Strings text
+     * @param UserName
+     * @param Password
+     * @return an Admin object which matches username and password
+     * @throws Exception
+     */
     @Override
     public User LoginUser(String UserName, String Password) throws Exception {
-        return null;
+        return loginDAO.LoginUser(UserName, Password);
     }
 }

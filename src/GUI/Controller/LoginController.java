@@ -26,7 +26,7 @@ public class LoginController extends BaseController {
     @FXML
     private BorderPane borderPaneLogin;
     @FXML
-    private Button BtnClose,BtnLogin,btnMinimize,btnMaximized;
+    private Button BtnClose, btnLogin,btnMinimize,btnMaximized;
     @FXML
     private TextField txtPassword, txtUsername;
     private ExceptionHandler exceptionHandler;
@@ -36,30 +36,34 @@ public class LoginController extends BaseController {
         try {
             String username = txtUsername.getText();
             String password = txtPassword.getText();
+            System.out.println("Hallo");
             getModelsHandler().getLoginModel().loginAction(username, password);
+
             Admin admin = getModelsHandler().getLoginModel().getLoggedInAdmin();
             Technician technician = getModelsHandler().getLoginModel().getLoggedInTechnician();
             ProjectManager pm = getModelsHandler().getLoginModel().getLoggedInProjectManager();
             SalesPerson sp = getModelsHandler().getLoginModel().getLoggedInSalesPerson();
+
             if (admin != null) {
-                openMenuView();
-                Stage stage = (Stage) BtnLogin.getScene().getWindow();
+                openMainView();
+                Stage stage = (Stage) btnLogin.getScene().getWindow();
                 stage.close();
             } else if (technician != null) {
-                openMenuView();
-                Stage stage = (Stage) BtnLogin.getScene().getWindow();
+                openMainView();
+                Stage stage = (Stage) btnLogin.getScene().getWindow();
                 stage.close();
             } else if (pm != null) {
-                openMenuView();
-                Stage stage = (Stage) BtnLogin.getScene().getWindow();
+                openMainView();
+                Stage stage = (Stage) btnLogin.getScene().getWindow();
                 stage.close();
             } else if (sp != null) {
-                openMenuView();
-                Stage stage = (Stage) BtnLogin.getScene().getWindow();
+                openMainView();
+                Stage stage = (Stage) btnLogin.getScene().getWindow();
                 stage.close();
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.WARNING,"Incorrect username or password, please try again");
             txtPassword.clear();
             txtUsername.clear();
@@ -68,8 +72,8 @@ public class LoginController extends BaseController {
 
 
     }
-    private void openMenuView() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/MenuView.fxml"));
+    private void openMainView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/MainView.fxml"));
 
         Parent root = loader.load();
         Stage stage = new Stage();
@@ -79,7 +83,7 @@ public class LoginController extends BaseController {
         controller.setup();
 
         stage.setScene(new Scene(root));
-        stage.setTitle("MainMenu");
+        stage.setTitle("Main Menu");
         stage.initStyle(StageStyle.UNDECORATED);
         stage.getIcons().add(new Image("GUI/Images/WUAVlogo.png"));
         stage.show();
@@ -99,8 +103,8 @@ public class LoginController extends BaseController {
 
     public void handleEnter(KeyEvent keyEvent) throws IOException {
         if (keyEvent.getCode().equals(KeyCode.ENTER)){
-
-            openMenuView();
+            openMainView();
+            //handleLogin();
         }
     }
     private void dragScreen(){

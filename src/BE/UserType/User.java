@@ -3,41 +3,47 @@ package BE.UserType;
 public class User {
 
     private String name;
-    private String username;
-    private String password;
-    private int usertype;
-    private int userid;
+    private String userName;
+    private String passWord;
+    private int userType;
+    private int userId;
 
-    public User(String name, String username, String password, int usertype, int userid) {
+    public User(int userId, String passWord, String userName, String name, int userType) {
+        this.userId = userId;
+        this.passWord = passWord;
+        this.userName = userName;
         this.name = name;
-        this.username = username;
-        this.password = password;
-        this.usertype = usertype;
-        this.userid = userid;
+        this.userType = userType;
+    }
+    public User(String passWord, String userName, String name, int userType) {
+        this.passWord = passWord;
+        this.userName = userName;
+        this.name = name;
+        this.userType = userType;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassWord() {
+        return passWord;
     }
 
-    public int getUsertype() {
-        return usertype;
+    public int getUserType() {
+        return userType;
     }
 
-    public int getUserid() {
-        return userid;
+    public int getUserId() {
+        return userId;
     }
 
     @Override
     public String toString() {
-        return userid + "\t" + name + " " + "\t" + this.getClass().getSimpleName();
+        return userId + "\t" + name + " " + "\t" + this.getClass().getSimpleName();
     }
 }
