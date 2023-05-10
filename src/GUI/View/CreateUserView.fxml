@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane prefHeight="750.0" prefWidth="800.0" stylesheets="@../Css/Main_Css.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.CreateUserController">
+   <children>
+      <Label layoutX="50.0" layoutY="50.0" styleClass="Title" text="Opret ny Bruger" />
+      <Label layoutX="50.0" layoutY="130.0" styleClass="Text_Label" text="Navn" />
+      <Label layoutX="50.0" layoutY="250.0" styleClass="Text_Label" text="Bruger type" />
+      <Label layoutX="450.0" layoutY="130.0" styleClass="Text_Label" text="Brugernavn" />
+      <Label layoutX="450.0" layoutY="250.0" styleClass="Text_Label" text="Adgangskode" />
+      <TextField fx:id="txtName" layoutX="50.0" layoutY="170.0" prefWidth="300.0" />
+      <TextField fx:id="txtUserType" layoutX="50.0" layoutY="290.0" prefWidth="300.0" />
+      <TextField fx:id="txtUsername" layoutX="450.0" layoutY="170.0" prefWidth="300.0" />
+      <TextField fx:id="txtPassWord" layoutX="450.0" layoutY="290.0" prefWidth="300.0" />
+   </children>
+</Pane>

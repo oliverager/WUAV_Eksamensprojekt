@@ -30,19 +30,34 @@ public class MainController extends BaseController {
     private BorderPane borderPaneMenu;
     @FXML
     private Button btn1, btn2, btn3, btn4;
-
     private Alert alert;
 
-
-
     private void openCreateProjectView() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/GUI/View/CreateProjectView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateProjectView.fxml"));
         Parent view = loader.load();
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
     private void openSeeAllProjectView() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("src/GUI/View/SeeAllProjectsView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/SeeAllProjectsView.fxml"));
+        Parent view = loader.load();
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(view);
+    }
+    private void openCreateUserView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateUserView.fxml"));
+        Parent view = loader.load();
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(view);
+    }
+    private void openCreateCustomerView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateCustomerView.fxml"));
+        Parent view = loader.load();
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(view);
+    }
+    private void openProjectView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/ProjectView.fxml"));
         Parent view = loader.load();
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
@@ -109,11 +124,10 @@ public class MainController extends BaseController {
         try {
             checkUserAndSetup();
             grantingAccess();
-            //openCreateProjectView();
-            //openSeeAllProjectView();
+            openSeeAllProjectView();
         } catch (Exception e) {
             e.printStackTrace();
-           // throw new RuntimeException(e);
+
         }
     }
 
@@ -148,6 +162,13 @@ public class MainController extends BaseController {
 
     private void setupAdmin() {
         lblUsertype.setText("Admin");
+        btn1.setText("Opret ny Bruger");
+        btn2.setDisable(true);
+        btn2.setVisible(false);
+        btn3.setDisable(true);
+        btn3.setVisible(false);
+        btn4.setDisable(true);
+        btn4.setVisible(false);
     }
     private void setupProjectManager() {
         lblUsertype.setText("Projekt Manager");
