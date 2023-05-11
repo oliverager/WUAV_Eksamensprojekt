@@ -44,6 +44,18 @@ public class AdminModel {
         return allUsers;
     }
 
+    public void updateUser(User updatedUser, User oldUser) throws Exception{
+        userObservableList.remove(oldUser);
+        allUsers.remove(oldUser);
+        adminManager.updateUser(updatedUser);
+        userObservableList.add(updatedUser);
+        allUsers.add(updatedUser);
+    }
+
+    public boolean checkUserName(String userName) throws Exception{
+        return adminManager.checkUserName(userName);
+    }
+
     public void searchUsers (String query) {
         if (allUsers.isEmpty())
             allUsers.addAll(userObservableList);

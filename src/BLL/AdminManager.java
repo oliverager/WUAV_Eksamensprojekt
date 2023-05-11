@@ -43,8 +43,8 @@ public class AdminManager implements IAdminManager {
     }
 
     @Override
-    public boolean checkUserName(User user) throws Exception {
-        return databaseAcces.checkUserName(user);
+    public boolean checkUserName(String userName) throws Exception {
+        return databaseAcces.checkUserName(userName);
     }
 
     @Override

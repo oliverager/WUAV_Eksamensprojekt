@@ -67,6 +67,9 @@
 .Nav-bar-Image {
     -fx-background-image: url(/GUI/Images/WuavLogoWhite.png);
 }
+.Nav-bar-Image:hover {
+    -fx-cursor: hand;
+}
 .Nav-bar-Button {
     -fx-background-color: transparent;
     -fx-text-fill: #FFFFFF;

@@ -31,7 +31,7 @@
          <children>
             <VBox layoutX="50.0" layoutY="275.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="200.0" fitWidth="200.0" onMouseClicked="#HandlingReturningHome" pickOnBounds="true" preserveRatio="true" styleClass="Nav-bar-Image">
                      <image>
                         <Image url="@../Images/WuavLogoWhite.png" />
                      </image>

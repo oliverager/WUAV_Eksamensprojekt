@@ -11,16 +11,18 @@ public class Project {
     private String layout;
     private String description;
     private String Images;
+    private boolean status;
     private int techniciansid;
     private int customerid;
 
-    public Project(int projectid, String name, LocalDate date, String layout, String description, String images, int techniciansid, int customerid) {
+    public Project(int projectid, String name, LocalDate date, String layout, String description, String images, boolean status, int techniciansid, int customerid) {
         this.projectid = projectid;
         this.name = name;
         this.date = date;
         this.layout = layout;
         this.description = description;
         Images = images;
+        this.status = status;
         this.techniciansid = techniciansid;
         this.customerid = customerid;
     }
@@ -47,6 +49,10 @@ public class Project {
 
     public String getImages() {
         return Images;
+    }
+
+    public boolean isStatus() {
+        return status;
     }
 
     public int getTechniciansid() {

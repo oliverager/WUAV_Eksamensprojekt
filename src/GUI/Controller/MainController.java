@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -63,13 +64,33 @@ public class MainController extends BaseController {
         contentArea.getChildren().setAll(view);
     }
     @FXML
-    public void handleButton1(ActionEvent event) throws IOException {
-        openCreateProjectView();
+    public void handleButton1(ActionEvent event) {
+        try {
+            if (btn1.getText().equals("Opret nyt Projekt")) {
+                openCreateProjectView();
+            } else if (btn1.getText().equals("Opret ny Bruger")) {
+                openCreateUserView();
+            } else if (btn1.getText().equals("Opret ny Kunde")) {
+                openCreateCustomerView();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ExceptionHandler.displayError(new Exception("Failed to do action pleas try again", e));
+        }
     }
 
     @FXML
     public void handleButton2(ActionEvent event) {
+        try {
+            if (btn2.getText().equals("Opret ny Kunde")) {
+                openCreateCustomerView();
+            } else if (btn2.getText().equals("")) {
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ExceptionHandler.displayError(new Exception("Failed to do action pleas try again", e));
+        }
     }
 
     @FXML
@@ -80,6 +101,11 @@ public class MainController extends BaseController {
     @FXML
     public void handleButton4(ActionEvent event) {
 
+    }
+
+    @FXML
+    public void HandlingReturningHome(MouseEvent mouseEvent) throws IOException {
+        openSeeAllProjectView();
     }
 
 
@@ -123,7 +149,7 @@ public class MainController extends BaseController {
 
         try {
             checkUserAndSetup();
-            grantingAccess();
+            //grantingAccess();
             openSeeAllProjectView();
         } catch (Exception e) {
             e.printStackTrace();
@@ -172,12 +198,32 @@ public class MainController extends BaseController {
     }
     private void setupProjectManager() {
         lblUsertype.setText("Projekt Manager");
+        btn1.setText("Opret nyt Projekt");
+        btn2.setText("Opret ny Kunde");
+        btn3.setDisable(true);
+        btn3.setVisible(false);
+        btn4.setDisable(true);
+        btn4.setVisible(false);
     }
     private void setupTechnician() {
         lblUsertype.setText("Tekniker");
+        btn1.setText("Opret nyt Projekt");
+        btn2.setDisable(true);
+        btn2.setVisible(false);
+        btn3.setDisable(true);
+        btn3.setVisible(false);
+        btn4.setDisable(true);
+        btn4.setVisible(false);
     }
     private void setupSalesPerson() {
         lblUsertype.setText("Sælger");
+        btn1.setText("Opret ny Kunde");
+        btn2.setDisable(true);
+        btn2.setVisible(false);
+        btn3.setDisable(true);
+        btn3.setVisible(false);
+        btn4.setDisable(true);
+        btn4.setVisible(false);
     }
 
 
@@ -207,6 +253,5 @@ public class MainController extends BaseController {
         } else {
             stage.setMaximized(true);
         }
-
     }
 }

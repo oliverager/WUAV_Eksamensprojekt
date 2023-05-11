@@ -8,12 +8,12 @@ public class Customer {
     private int customertype;
     private int customerid;
 
-    public Customer(String name, String address, double cvrNummer, int customertype, int customerid) {
+    public Customer(int customerid, String name, String address, double cvrNummer, int customertype) {
+        this.customerid = customerid;
         this.name = name;
         this.address = address;
         this.cvrNummer = cvrNummer;
         this.customertype = customertype;
-        this.customerid = customerid;
     }
 
     public String getName() {
