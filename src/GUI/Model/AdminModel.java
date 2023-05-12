@@ -24,10 +24,11 @@ public class AdminModel {
         return userObservableList;
     }
 
-    public AdminModel() throws IOException {
+    public AdminModel() throws Exception {
         adminManager = new AdminManager();
         allUsers = new ArrayList<>();
         userObservableList = FXCollections.observableArrayList();
+        userObservableList.addAll(adminManager.getAllUsers());
         currentProjectTechnician = FXCollections.observableArrayList();
     }
     public void createUser(User user) throws Exception {

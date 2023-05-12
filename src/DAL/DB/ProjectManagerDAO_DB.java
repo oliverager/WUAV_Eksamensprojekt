@@ -26,39 +26,42 @@ public class ProjectManagerDAO_DB implements IProjectManagerDAO {
 
     @Override
     public List<Project> getAllProject() throws Exception {
-        String sql = "SELECT * FROM Project";
-        try (Connection conn = dbConnector.getConnection()) {
+        List<Project> allProjects = new ArrayList<>();
 
-            PreparedStatement statement = conn.prepareStatement(sql);
-            List<Project> projects = new ArrayList<>();
+        try (Connection conn = dbConnector.getConnection();
+            Statement statement = conn.createStatement())
+        {
+            String sql = "SELECT * FROM Project";
 
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next())
+            {
                 int id = rs.getInt("Id");
                 String name = rs.getString("Name");
                 LocalDate date = rs.getDate("Date").toLocalDate();
                 String layout = rs.getString("Layout");
                 String description = rs.getString("Description");
                 String images = rs.getString("Image");
+                boolean status = rs.getBoolean("Status");
                 int techniciansid = rs.getInt("Assign_Technicians_Id");
                 int customerid = rs.getInt("Customer_Id");
 
-                Project project = new Project(id, name, date, layout, description, images, techniciansid, customerid);
-                projects.add(project);
+                Project project = new Project(id, name, date, layout, description, images, status, techniciansid, customerid);
+                allProjects.add(project);
             }
-            return projects;
+            return allProjects;
         }
         catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("failed to found current projects", e);
+            throw new Exception("Could not get projects from database", e);
         }
     }
 
     @Override
     public Project createProject(Project project, Technician technician) throws Exception {
         String sql = "INSERT INTO Project(Name,Date,Layout,Description,Image,Assign_Technicians_Id,Customer_Id) VALUES(?,?,?,?,?,?,?);";
-        try (Connection connection = dbConnector.getConnection(); PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection connection = dbConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, project.getName());
             statement.setDate(2, (java.sql.Date.valueOf(project.getDate())));
@@ -76,19 +79,18 @@ public class ProjectManagerDAO_DB implements IProjectManagerDAO {
             }
 
             Project project1 = new Project(id, project.getName(), project.getDate(), project.getLayout(),
-                    project.getDescription(), project.getImages(), project.getTechniciansid(), project.getCustomerid());
+                    project.getDescription(), project.getImages(), project.isStatus(), project.getTechniciansid(), project.getCustomerid());
             return project1;
         }
-        catch (SQLException e)
-        {
+        catch (SQLException e) {
             e.printStackTrace();
-            return null;
+            throw new Exception("Kunne ikke oprette projektet", e);
         }
     }
 
     @Override
     public void updateProject(Project project) throws Exception {
-        String sql = "UPDATE [Event] SET Name=?, Date=?, Layout=?, DESCRIPTION=?, IMAGE=?, Assign_Technicians_Id=?, Customer_Id=? WHERE Id=?;";
+        String sql = "UPDATE [Project] SET Name=?, Date=?, Layout=?, DESCRIPTION=?, IMAGE=?, Assign_Technicians_Id=?, Customer_Id=? WHERE Id=?;";
         try (Connection connection = dbConnector.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql))
         {
@@ -105,7 +107,22 @@ public class ProjectManagerDAO_DB implements IProjectManagerDAO {
         }
         catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("failed to update event", e);
+            throw new Exception("Kunne ikke opdatere projektet", e);
+        }
+    }
+    @Override
+    public void updateStatus(Project project) throws Exception {
+        String sql = "UPDATE [Project] SET Status=? WHERE Id=?;";
+        try (Connection connection = dbConnector.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setBoolean(1, project.isStatus());
+
+            statement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Kunne ikke opdatere projektet status", e);
         }
     }
 
@@ -144,7 +161,7 @@ public class ProjectManagerDAO_DB implements IProjectManagerDAO {
         }
         catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Failed to create Customer", e);
+            throw new Exception("Kunne ikke oprette kunde", e);
         }
     }
 
@@ -162,7 +179,7 @@ public class ProjectManagerDAO_DB implements IProjectManagerDAO {
         }
         catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Failed to update customer", e);
+            throw new Exception("Kunne ikke opdatere kunde", e);
         }
     }
 }

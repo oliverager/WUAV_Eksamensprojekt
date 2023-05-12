@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="GUI.Controller.SeeAllUserController"
+            prefHeight="750.0" prefWidth="800.0">
+    <children>
+        <Label layoutX="50.0" layoutY="50.0" styleClass="Title" text="Se alle Bruger" />
+        <TableView fx:id="tbvUser" layoutX="50.0" layoutY="150.0" prefWidth="700.0">
+            <columns>
+                <TableColumn fx:id="tbcId" prefWidth="50.0" text="Id" />
+                <TableColumn fx:id="tbcName" prefWidth="400.0" text="Navn" />
+                <TableColumn fx:id="tbcUserType" prefWidth="250.0" text="Bruger Type" />
+            </columns>
+        </TableView>
+        <TextField fx:id="txtSearchBar" layoutX="550.0" layoutY="114.0" onKeyPressed="#handleSearch" prefHeight="36.0" prefWidth="200.0" promptText="Søgeord..." />
+    </children>
+</Pane>

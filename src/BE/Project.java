@@ -27,6 +27,19 @@ public class Project {
         this.customerid = customerid;
     }
 
+    public Project(int id, String name, LocalDate date, String layout, String description, String images, int techniciansid, int customerid) {
+        this.projectid = id;
+        this.name = name;
+        this.date = date;
+        this.layout = layout;
+        this.description = description;
+        Images = images;
+        this.status = false;
+        this.techniciansid = techniciansid;
+        this.customerid = customerid;
+
+    }
+
     public int getProjectid() {
         return projectid;
     }

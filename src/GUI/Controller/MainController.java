@@ -63,6 +63,18 @@ public class MainController extends BaseController {
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
+    private void openSeeAllUserView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/SeeAllUserView.fxml"));
+        Parent view = loader.load();
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(view);
+    }
+    private void openSeeAllCustomerView() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/SeeAllCustomerView.fxml"));
+        Parent view = loader.load();
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(view);
+    }
     @FXML
     public void handleButton1(ActionEvent event) {
         try {
@@ -84,8 +96,8 @@ public class MainController extends BaseController {
         try {
             if (btn2.getText().equals("Opret ny Kunde")) {
                 openCreateCustomerView();
-            } else if (btn2.getText().equals("")) {
-
+            } else if (btn2.getText().equals("Se alle Bruger")) {
+                openSeeAllUserView();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -189,8 +201,7 @@ public class MainController extends BaseController {
     private void setupAdmin() {
         lblUsertype.setText("Admin");
         btn1.setText("Opret ny Bruger");
-        btn2.setDisable(true);
-        btn2.setVisible(false);
+        btn2.setText("Se alle Bruger");
         btn3.setDisable(true);
         btn3.setVisible(false);
         btn4.setDisable(true);

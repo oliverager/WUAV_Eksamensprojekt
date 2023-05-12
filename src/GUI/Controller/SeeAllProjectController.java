@@ -51,7 +51,7 @@ public class SeeAllProjectController extends BaseController implements Initializ
         }
     }
     public void handleSearch(KeyEvent keyEvent) {
-        search();
+        //search();
     }
 
     @Override
