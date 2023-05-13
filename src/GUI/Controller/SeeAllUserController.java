@@ -2,6 +2,7 @@ package GUI.Controller;
 
 import BE.UserType.User;
 import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -11,6 +12,8 @@ import javafx.scene.input.KeyEvent;
 import java.io.IOException;
 
 public class SeeAllUserController extends BaseController {
+    @FXML
+    private ListView<User> lvUser;
     @FXML
     private TextField txtSearchBar;
     @FXML
@@ -30,6 +33,7 @@ public class SeeAllUserController extends BaseController {
         tbcUserType.setCellValueFactory(new PropertyValueFactory<User, String>("Bruger Type"));
 
         tbvUser.setItems(getModelsHandler().getAdminModel().getUserObservableList());
+        lvUser.setItems(getModelsHandler().getAdminModel().getUserObservableList());
     }
     private void search() {
         String search = txtSearchBar.getText().toLowerCase();

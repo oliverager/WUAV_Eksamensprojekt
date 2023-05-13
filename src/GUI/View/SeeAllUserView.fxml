@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
 
-<Pane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="GUI.Controller.SeeAllUserController"
-            prefHeight="750.0" prefWidth="800.0">
+<Pane prefHeight="750.0" prefWidth="800.0" stylesheets="@../Css/Main_Css.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.SeeAllUserController">
     <children>
         <Label layoutX="50.0" layoutY="50.0" styleClass="Title" text="Se alle Bruger" />
         <TableView fx:id="tbvUser" layoutX="50.0" layoutY="150.0" prefWidth="700.0">
@@ -20,5 +18,6 @@
             </columns>
         </TableView>
         <TextField fx:id="txtSearchBar" layoutX="550.0" layoutY="114.0" onKeyPressed="#handleSearch" prefHeight="36.0" prefWidth="200.0" promptText="Søgeord..." />
+      <ListView fx:id="lvUser" layoutX="50.0" layoutY="550.0" prefHeight="150.0" prefWidth="300.0" />
     </children>
 </Pane>

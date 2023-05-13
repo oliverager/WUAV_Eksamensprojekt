@@ -30,6 +30,7 @@ public class AdminModel {
         userObservableList = FXCollections.observableArrayList();
         userObservableList.addAll(adminManager.getAllUsers());
         currentProjectTechnician = FXCollections.observableArrayList();
+        //currentProjectTechnician.addAll(adminManager.getUsersWorkingOnProject());
     }
     public void createUser(User user) throws Exception {
         User newUser = adminManager.createUser(user);

@@ -36,7 +36,6 @@ public class LoginController extends BaseController {
         try {
             String username = txtUsername.getText();
             String password = txtPassword.getText();
-            System.out.println("Hallo");
             getModelsHandler().getLoginModel().loginAction(username, password);
 
             Admin admin = getModelsHandler().getLoginModel().getLoggedInAdmin();
