@@ -34,7 +34,7 @@ public class ProjectManagerModel {
     }
     public void getAllProject() throws Exception {
         List<Project> projectList = projectManagerManager.getAllProject();
-        projectList.addAll(projectList);
+        projectObservableList.addAll(projectList);
     }
     public void updateProject(Project updatedProject, Project oldProject) throws Exception {
         projectObservableList.remove(oldProject);

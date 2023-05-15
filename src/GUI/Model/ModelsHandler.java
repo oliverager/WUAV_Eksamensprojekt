@@ -9,7 +9,6 @@ public class ModelsHandler {
 
     private ProjectManagerModel pmModel;
     private LoginModel loginModel;
-
     private AdminModel adminModel;
 
     private List<UserType> userTypeList;

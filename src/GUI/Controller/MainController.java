@@ -30,48 +30,83 @@ public class MainController extends BaseController {
     @FXML
     private BorderPane borderPaneMenu;
     @FXML
-    private Button btn1, btn2, btn3, btn4;
+    private Button btn1, btn2, btn3;
     private Alert alert;
 
-    private void openCreateProjectView() throws IOException {
+    private void openCreateProjectView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateProjectView.fxml"));
         Parent view = loader.load();
+
+        BaseController controller = loader.getController();
+        controller.setModel(new ModelsHandler());
+        controller.setup();
+
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
-    private void openSeeAllProjectView() throws IOException {
+    private void openSeeAllProjectView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/SeeAllProjectsView.fxml"));
         Parent view = loader.load();
+
+        BaseController controller = loader.getController();
+        controller.setModel(new ModelsHandler());
+        controller.setup();
+
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
-    private void openCreateUserView() throws IOException {
+    private void openCreateUserView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateUserView.fxml"));
         Parent view = loader.load();
+
+        BaseController controller = loader.getController();
+        controller.setModel(new ModelsHandler());
+        controller.setup();
+
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
-    private void openCreateCustomerView() throws IOException {
+    private void openCreateCustomerView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateCustomerView.fxml"));
         Parent view = loader.load();
+
+        BaseController controller = loader.getController();
+        controller.setModel(new ModelsHandler());
+        controller.setup();
+
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
-    private void openProjectView() throws IOException {
+    private void openProjectView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/ProjectView.fxml"));
         Parent view = loader.load();
+
+        BaseController controller = loader.getController();
+        controller.setModel(new ModelsHandler());
+        controller.setup();
+
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
-    private void openSeeAllUserView() throws IOException {
+    private void openSeeAllUserView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/SeeAllUserView.fxml"));
         Parent view = loader.load();
+
+        BaseController controller = loader.getController();
+        controller.setModel(new ModelsHandler());
+        controller.setup();
+
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
-    private void openSeeAllCustomerView() throws IOException {
+    private void openSeeAllCustomerView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/SeeAllCustomerView.fxml"));
         Parent view = loader.load();
+
+        BaseController controller = loader.getController();
+        controller.setModel(new ModelsHandler());
+        controller.setup();
+
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
@@ -111,12 +146,7 @@ public class MainController extends BaseController {
     }
 
     @FXML
-    public void handleButton4(ActionEvent event) {
-
-    }
-
-    @FXML
-    public void HandlingReturningHome(MouseEvent mouseEvent) throws IOException {
+    public void HandlingReturningHome(MouseEvent mouseEvent) throws Exception {
         openSeeAllProjectView();
     }
 
@@ -160,6 +190,7 @@ public class MainController extends BaseController {
         dragScreen();
 
         try {
+            getModelsHandler().getPmModel().getAllProject();
             checkUserAndSetup();
             //grantingAccess();
             openSeeAllProjectView();
@@ -204,8 +235,6 @@ public class MainController extends BaseController {
         btn2.setText("Se alle Bruger");
         btn3.setDisable(true);
         btn3.setVisible(false);
-        btn4.setDisable(true);
-        btn4.setVisible(false);
     }
     private void setupProjectManager() {
         lblUsertype.setText("Projekt Manager");
@@ -213,8 +242,6 @@ public class MainController extends BaseController {
         btn2.setText("Opret ny Kunde");
         btn3.setDisable(true);
         btn3.setVisible(false);
-        btn4.setDisable(true);
-        btn4.setVisible(false);
     }
     private void setupTechnician() {
         lblUsertype.setText("Tekniker");
@@ -223,8 +250,6 @@ public class MainController extends BaseController {
         btn2.setVisible(false);
         btn3.setDisable(true);
         btn3.setVisible(false);
-        btn4.setDisable(true);
-        btn4.setVisible(false);
     }
     private void setupSalesPerson() {
         lblUsertype.setText("Sælger");
@@ -233,8 +258,6 @@ public class MainController extends BaseController {
         btn2.setVisible(false);
         btn3.setDisable(true);
         btn3.setVisible(false);
-        btn4.setDisable(true);
-        btn4.setVisible(false);
     }
 
 

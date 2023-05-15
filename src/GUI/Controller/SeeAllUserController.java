@@ -13,8 +13,6 @@ import java.io.IOException;
 
 public class SeeAllUserController extends BaseController {
     @FXML
-    private ListView<User> lvUser;
-    @FXML
     private TextField txtSearchBar;
     @FXML
     private TableView<User> tbvUser;
@@ -33,7 +31,6 @@ public class SeeAllUserController extends BaseController {
         tbcUserType.setCellValueFactory(new PropertyValueFactory<User, String>("Bruger Type"));
 
         tbvUser.setItems(getModelsHandler().getAdminModel().getUserObservableList());
-        lvUser.setItems(getModelsHandler().getAdminModel().getUserObservableList());
     }
     private void search() {
         String search = txtSearchBar.getText().toLowerCase();

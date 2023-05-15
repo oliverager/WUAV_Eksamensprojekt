@@ -2,7 +2,6 @@ package GUI.Controller;
 
 import BE.Project;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -14,7 +13,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class SeeAllProjectController extends BaseController implements Initializable {
+public class SeeAllProjectController extends BaseController {
     @FXML
     private TextField txtSearchBar;
     @FXML
@@ -32,6 +31,12 @@ public class SeeAllProjectController extends BaseController implements Initializ
 
     @Override
     public void setup() throws IOException {
+
+        try {
+            getModelsHandler().getPmModel().getAllProject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         tbcId.setCellValueFactory(new PropertyValueFactory<Project, Integer>("Id"));
         tbcName.setCellValueFactory(new PropertyValueFactory<Project, String>("Projekt"));
@@ -52,10 +57,5 @@ public class SeeAllProjectController extends BaseController implements Initializ
     }
     public void handleSearch(KeyEvent keyEvent) {
         //search();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
     }
 }

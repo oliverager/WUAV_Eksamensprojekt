@@ -18,6 +18,5 @@
             </columns>
         </TableView>
         <TextField fx:id="txtSearchBar" layoutX="550.0" layoutY="114.0" onKeyPressed="#handleSearch" prefHeight="36.0" prefWidth="200.0" promptText="Søgeord..." />
-      <ListView fx:id="lvUser" layoutX="50.0" layoutY="550.0" prefHeight="150.0" prefWidth="300.0" />
     </children>
 </Pane>
