@@ -1,12 +1,8 @@
 package DAL.DB;
 
-import BE.Customer.B2B;
-import BE.Customer.B2C;
-import BE.Customer.B2G;
-import BE.Customer.Customer;
+
 import BE.Project;
 import BE.UserType.Technician;
-import BE.UserType.User;
 import DAL.DatabaseConnector;
 import DAL.Interface.IProjectManagerDAO;
 
@@ -126,60 +122,7 @@ public class ProjectManagerDAO_DB implements IProjectManagerDAO {
         }
     }
 
-    @Override
-    public Customer createCustomer(Customer customer) throws Exception {
-        String sql = "INSERT INTO [Customer] (Name, Cvr, Adress, CustomerType) VALUES (?,?,?,?);";
-        try (Connection connection = dbConnector.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setString(1, customer.getName());
-            statement.setDouble(2, customer.getCvrNummer());
-            statement.setString(3, customer.getAddress());
-            statement.setInt(4, customer.getCustomertype());
 
-            statement.executeUpdate();
 
-            ResultSet rs = statement.getGeneratedKeys();
-            int id = 0;
-
-            if(rs.next()) {
-                id = rs.getInt(1);
-            }
-
-            Customer newCustomer = null;
-
-            if (customer.getClass().getSimpleName() == B2B.class.getSimpleName()) {
-                newCustomer = new B2B(customer.getCustomerid(), customer.getName(), customer.getAddress(), customer.getCvrNummer());
-            }
-            else if (customer.getClass().getSimpleName() == B2C.class.getSimpleName()) {
-                newCustomer = new B2C(customer.getCustomerid(), customer.getName(), customer.getAddress(), customer.getCvrNummer());
-            }
-            else if (customer.getClass().getSimpleName() == B2G.class.getSimpleName()) {
-                newCustomer = new B2G(customer.getCustomerid(), customer.getName(), customer.getAddress(), customer.getCvrNummer());
-            }
-            return newCustomer;
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-            throw new Exception("Kunne ikke oprette kunde", e);
-        }
-    }
-
-    @Override
-    public void updateCustomer(Customer customer) throws Exception {
-        String sql = "UPDATE [Customer] SET Name=?, Address=? WHERE Id=?;";
-        try (Connection connection = dbConnector.getConnection();
-        PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setString(1, customer.getName());
-            statement.setString(2, customer.getAddress());
-            statement.setInt(3, customer.getCustomerid());
-
-            statement.executeUpdate();
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-            throw new Exception("Kunne ikke opdatere kunde", e);
-        }
-    }
 }

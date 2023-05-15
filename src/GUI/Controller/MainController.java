@@ -10,14 +10,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.IOException;
 import java.util.Optional;
 
 public class MainController extends BaseController {
@@ -190,7 +188,7 @@ public class MainController extends BaseController {
         dragScreen();
 
         try {
-            getModelsHandler().getPmModel().getAllProject();
+            getModelsHandler().getProjectManagerModel().getAllProject();
             checkUserAndSetup();
             //grantingAccess();
             openSeeAllProjectView();
@@ -218,7 +216,7 @@ public class MainController extends BaseController {
         if (getModelsHandler().getLoginModel().getLoggedInTechnician() != null) {
             boolean userAccess = false;
             int loggedInUserId = getModelsHandler().getLoginModel().getLoggedInTechnician().getUserId();
-            for (User u : getModelsHandler().getPmModel().getCurrentProjectTechnician()) {
+            for (User u : getModelsHandler().getProjectManagerModel().getCurrentProjectTechnician()) {
                 if (u.getUserId() == loggedInUserId) {
                     userAccess = true;
                 }

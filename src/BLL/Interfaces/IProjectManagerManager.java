@@ -14,7 +14,5 @@ public interface IProjectManagerManager {
 
     void updateProject(Project project) throws Exception;
 
-    Customer createCustomer(Customer customer) throws Exception;
-
-    void updateCustomer(Customer customer) throws Exception;
+    void updateStatus(Project project) throws Exception;
 }

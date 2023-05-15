@@ -48,11 +48,6 @@ public class AdminManager implements IAdminManager {
     }
 
     @Override
-    public List<Integer> getUsersWorkingOnProject(Project project) throws Exception {
-        return databaseAcces.getUsersWorkingOnProject(project);
-    }
-
-    @Override
     public void deleteProjectRelations(Project project) throws Exception {
         databaseAcces.deleteProjectRelations(project);
     }

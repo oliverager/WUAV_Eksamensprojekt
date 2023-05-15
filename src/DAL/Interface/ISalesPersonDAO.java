@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ISalesPersonDAO {
 
-    List<Project> getAllProject() throws Exception;
+    List<Customer> getAllCustomers() throws Exception;
 
     Customer createCustomer(Customer customer) throws Exception;
 

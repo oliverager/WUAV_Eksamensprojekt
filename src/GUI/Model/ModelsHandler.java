@@ -7,9 +7,10 @@ import java.util.List;
 
 public class ModelsHandler {
 
-    private ProjectManagerModel pmModel;
+    private ProjectManagerModel projectManagerModel;
     private LoginModel loginModel;
     private AdminModel adminModel;
+    private SalesPersonModel salesPersonModel;
 
     private List<UserType> userTypeList;
     private List<CustomerType> customerTypeList;
@@ -17,7 +18,8 @@ public class ModelsHandler {
     public ModelsHandler() throws Exception {
         loginModel = new LoginModel();
         adminModel = new AdminModel();
-        pmModel = new ProjectManagerModel();
+        salesPersonModel = new SalesPersonModel();
+        projectManagerModel = new ProjectManagerModel();
 
     }
 
@@ -29,8 +31,12 @@ public class ModelsHandler {
         return adminModel;
     }
 
-    public ProjectManagerModel getPmModel() {
-        return pmModel;
+    public ProjectManagerModel getProjectManagerModel() {
+        return projectManagerModel;
+    }
+
+    public SalesPersonModel getSalesPersonModel() {
+        return salesPersonModel;
     }
 
     public List<UserType> getUserTypeList() {

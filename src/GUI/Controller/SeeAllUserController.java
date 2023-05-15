@@ -21,14 +21,13 @@ public class SeeAllUserController extends BaseController {
     @FXML
     private TableColumn<User, String> tbcName;
     @FXML
-    private TableColumn<User, String> tbcUserType;
-
+    private TableColumn<User, Integer> tbcUserType;
     @Override
     public void setup() throws IOException {
 
-        tbcId.setCellValueFactory(new PropertyValueFactory<User, Integer>("Id"));
-        tbcName.setCellValueFactory(new PropertyValueFactory<User, String>("Navn"));
-        tbcUserType.setCellValueFactory(new PropertyValueFactory<User, String>("Bruger Type"));
+        tbcId.setCellValueFactory(new PropertyValueFactory<User, Integer>("userId"));
+        tbcName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
+        tbcUserType.setCellValueFactory(new PropertyValueFactory<User, Integer>("userType"));
 
         tbvUser.setItems(getModelsHandler().getAdminModel().getUserObservableList());
     }

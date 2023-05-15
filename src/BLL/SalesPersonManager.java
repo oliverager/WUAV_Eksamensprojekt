@@ -17,8 +17,8 @@ public class SalesPersonManager implements ISalesPersonManager {
     }
 
     @Override
-    public List<Project> getAllProject() throws Exception {
-        return databaseAcces.getAllProject();
+    public List<Customer> getAllCustomers() throws Exception {
+        return databaseAcces.getAllCustomers();
     }
 
     @Override

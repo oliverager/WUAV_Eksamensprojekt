@@ -9,9 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 public class SeeAllProjectController extends BaseController {
     @FXML
@@ -33,18 +31,18 @@ public class SeeAllProjectController extends BaseController {
     public void setup() throws IOException {
 
         try {
-            getModelsHandler().getPmModel().getAllProject();
+            getModelsHandler().getProjectManagerModel().getAllProject();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        tbcId.setCellValueFactory(new PropertyValueFactory<Project, Integer>("Id"));
-        tbcName.setCellValueFactory(new PropertyValueFactory<Project, String>("Projekt"));
-        tbcCustomer.setCellValueFactory(new PropertyValueFactory<Project, String>("Kunde"));
-        tbcDate.setCellValueFactory(new PropertyValueFactory<Project, LocalDate>("Data"));
-        tbcActive.setCellValueFactory(new PropertyValueFactory<Project, String>("Aktivere"));
+        tbcId.setCellValueFactory(new PropertyValueFactory<Project, Integer>("projectid"));
+        tbcName.setCellValueFactory(new PropertyValueFactory<Project, String>("name"));
+        tbcCustomer.setCellValueFactory(new PropertyValueFactory<Project, String>("customerid"));
+        tbcDate.setCellValueFactory(new PropertyValueFactory<Project, LocalDate>("date"));
+        tbcActive.setCellValueFactory(new PropertyValueFactory<Project, String>("status"));
 
-        tbvProject.setItems(getModelsHandler().getPmModel().getProjectObservableList());
+        tbvProject.setItems(getModelsHandler().getProjectManagerModel().getProjectObservableList());
     }
     private void search() {
         String search = txtSearchBar.getText().toLowerCase();

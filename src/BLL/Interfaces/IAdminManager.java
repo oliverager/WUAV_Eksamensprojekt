@@ -20,8 +20,6 @@ public interface IAdminManager {
 
     boolean checkUserName(String userName) throws Exception;
 
-    List<Integer> getUsersWorkingOnProject(Project project) throws Exception;
-
     void deleteProjectRelations(Project project) throws Exception;
 
 }

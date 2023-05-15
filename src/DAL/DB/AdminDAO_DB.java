@@ -77,7 +77,6 @@ public class AdminDAO_DB implements IAdminDAO {
             throw new Exception("Failed to remove " + user.getClass().getSimpleName(), e);
         }
     }
-
     private void deleteUserRelation(User user) throws Exception {
         String sql = "DELETE FROM WorkingOnProject WHERE Technicians_Id = ?;";
         try (Connection connection = dbConnector.getConnection();
@@ -200,14 +199,60 @@ public class AdminDAO_DB implements IAdminDAO {
             throw new Exception("Failed to check userName", e);
         }
     }
+    private List<Integer> getDokumentationIdFromProjectId(Project project) throws Exception {
+        String sql = "SELECT [Dokumentation_Id] FROM [DokumentationToProjects] WHERE Project_Id=?";
+        List<Integer> dokumentationIdList = new ArrayList<>();
 
-    @Override
-    public List<Integer> getUsersWorkingOnProject(Project project) throws Exception {
-        return null;
+        try (Connection connection = dbConnector.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, project.getProjectid());
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                int dokumentationId = rs.getInt("");
+                dokumentationIdList.add(dokumentationId);
+            }
+            return dokumentationIdList;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to remove " + project.getClass().getSimpleName(), e);
+        }
     }
+
 
     @Override
     public void deleteProjectRelations(Project project) throws Exception {
+        String sql = "DELETE FROM [Project] WHERE Id=?;";
+        String sql_Dokumentation = "DELETE FROM [Dokumentation] WHERE Id=?;";
+        String sql_WorkingOn = "DELETE FROM [WorkingOnProjects] WHERE Project_Id=?;";
 
+        List<Integer> dokumentationIdList = getDokumentationIdFromProjectId(project);
+        try (Connection connection = dbConnector.getConnection();) {
+            connection.setAutoCommit(false);
+
+            PreparedStatement workingOnTable = connection.prepareStatement(sql_WorkingOn);
+            workingOnTable.setInt(1, project.getProjectid());
+            workingOnTable.addBatch();
+
+            PreparedStatement dokumentationTable = connection.prepareStatement(sql_Dokumentation);
+            for (int i : dokumentationIdList) {
+                dokumentationTable.setInt(1, i);
+                dokumentationTable.addBatch();
+            }
+            dokumentationTable.executeBatch();
+
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, project.getProjectid());
+            statement.executeUpdate();
+
+            connection.commit();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to remove " + project.getClass().getSimpleName(), e);
+        }
     }
 }

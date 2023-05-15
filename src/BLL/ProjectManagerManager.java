@@ -34,12 +34,7 @@ public class ProjectManagerManager implements IProjectManagerManager {
     }
 
     @Override
-    public Customer createCustomer(Customer customer) throws Exception {
-        return databaseAcces.createCustomer(customer);
-    }
-
-    @Override
-    public void updateCustomer(Customer customer) throws Exception {
-        databaseAcces.updateCustomer(customer);
+    public void updateStatus(Project project) throws Exception {
+        databaseAcces.updateProject(project);
     }
 }
