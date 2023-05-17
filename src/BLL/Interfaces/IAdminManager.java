@@ -22,4 +22,5 @@ public interface IAdminManager {
 
     void deleteProjectRelations(Project project) throws Exception;
 
+    List<Integer> getUsersWorkingOnProject (Project project) throws Exception;
 }

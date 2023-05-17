@@ -30,6 +30,8 @@ public class MainController extends BaseController {
     @FXML
     private Button btn1, btn2, btn3;
     private Alert alert;
+    private ProjectController projectController;
+    private SeeAllProjectController seeAllProjectController;
 
     private void openCreateProjectView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateProjectView.fxml"));
@@ -64,6 +66,18 @@ public class MainController extends BaseController {
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
+    public void openProjectView() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/ProjectView.fxml"));
+        Parent view = loader.load();
+
+        BaseController controller = loader.getController();
+        controller.setModel(new ModelsHandler());
+        projectController.setOpenedProject(seeAllProjectController.getSelectedProject());
+        controller.setup();
+
+        contentArea.getChildren().removeAll();
+        contentArea.getChildren().setAll(view);
+    }
     private void openCreateCustomerView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateCustomerView.fxml"));
         Parent view = loader.load();
@@ -75,17 +89,7 @@ public class MainController extends BaseController {
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(view);
     }
-    private void openProjectView() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/ProjectView.fxml"));
-        Parent view = loader.load();
 
-        BaseController controller = loader.getController();
-        controller.setModel(new ModelsHandler());
-        controller.setup();
-
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(view);
-    }
     private void openSeeAllUserView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/SeeAllUserView.fxml"));
         Parent view = loader.load();

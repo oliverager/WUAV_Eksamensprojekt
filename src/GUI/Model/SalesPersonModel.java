@@ -22,6 +22,6 @@ public class SalesPersonModel {
         salesPersonManager = new SalesPersonManager();
         allCustomer = new ArrayList<>();
         customerObservableList = FXCollections.observableArrayList();
-        customerObservableList.addAll(salesPersonManager.getAllCustomers());
+        //customerObservableList.addAll(salesPersonManager.getAllCustomers());
     }
 }

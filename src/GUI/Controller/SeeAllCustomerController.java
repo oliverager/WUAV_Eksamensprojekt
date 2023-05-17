@@ -33,6 +33,7 @@ public class SeeAllCustomerController extends BaseController {
         tbcCustomerType.setCellValueFactory(new PropertyValueFactory<Customer, String>("customertype"));
 
         tbvCustomer.setItems(getModelsHandler().getSalesPersonModel().getAllCustomer());
+
     }
     private void search() {
         String search = txtSearchBar.getText().toLowerCase();

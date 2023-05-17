@@ -85,3 +85,12 @@
     -fx-font-size: 20px;
     -fx-font-family: 'Russo One', sans-serif;
 }
+.pane-button {
+    -fx-background-color: #E84911;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: 'Russo One', sans-serif;
+    -fx-font-size: 20px;
+}
+.pane-button:hover {
+    -fx-cursor: hand;
+}

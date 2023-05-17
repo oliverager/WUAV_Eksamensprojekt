@@ -23,6 +23,8 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
 
     @Override
     public List<Customer> getAllCustomers() throws Exception {
+        return null;
+        /**
         String sql = "SELECT * FROM [User];";
 
         try (Connection connection = dbConnector.getConnection();
@@ -34,7 +36,7 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
             while (rs.next()) {
                 int id = rs.getInt("Id");
                 String name = rs.getString("Name");
-                int cvr = rs.getInt("Cvr");
+                double cvr = rs.getDouble("Cvr");
                 String adress = rs.getString("Adress");
                 int customerType = rs.getInt("CustomerType");
 
@@ -47,7 +49,9 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
         catch (SQLException e) {
             e.printStackTrace();
             throw new Exception("Could not get customers from database", e);
+
         }
+         */
     }
 
     @Override

@@ -255,4 +255,29 @@ public class AdminDAO_DB implements IAdminDAO {
             throw new Exception("Failed to remove " + project.getClass().getSimpleName(), e);
         }
     }
+
+    @Override
+    public List<Integer> getUsersWorkingOnProject(Project project) throws Exception {
+        String sql = "SELECT * FROM WorkingOnProject WHERE Project_Id=?;";
+        try (Connection connection = dbConnector.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            List<Integer> userIdList = new ArrayList<>();
+
+            statement.setInt(1, project.getProjectid());
+
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Integer id = rs.getInt("Technician_Id");
+
+                userIdList.add(id);
+            }
+            return userIdList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to create Technician relations", e);
+        }
+
+    }
 }

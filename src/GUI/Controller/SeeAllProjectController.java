@@ -1,12 +1,17 @@
 package GUI.Controller;
 
 import BE.Project;
+import GUI.Model.ModelsHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -26,6 +31,8 @@ public class SeeAllProjectController extends BaseController {
     private TableColumn<Project, String> tbcName;
     @FXML
     private TableView<Project> tbvProject;
+    private String lastSelectedItemType;
+    private MainController mainController;
 
     @Override
     public void setup() throws IOException {
@@ -44,6 +51,29 @@ public class SeeAllProjectController extends BaseController {
 
         tbvProject.setItems(getModelsHandler().getProjectManagerModel().getProjectObservableList());
     }
+    @FXML
+    private void clickOnProject(MouseEvent mouseEvent) throws Exception {
+        if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2) {
+
+            lastSelectedItemType = "Project";
+            checkSelectedItemType();
+        }
+    }
+
+    private void checkSelectedItemType() throws Exception {
+        if (tbvProject.getSelectionModel().getSelectedItem() != null && lastSelectedItemType.equals("Project")) {
+            mainController.openProjectView();
+        }
+    }
+    public Project getSelectedProject() {
+        Project project = tbvProject.getSelectionModel().getSelectedItem();
+        if (project != null) {
+            return project;
+        } else
+            return null;
+    }
+
+
     private void search() {
         String search = txtSearchBar.getText().toLowerCase();
 
@@ -56,4 +86,6 @@ public class SeeAllProjectController extends BaseController {
     public void handleSearch(KeyEvent keyEvent) {
         //search();
     }
+
+
 }
