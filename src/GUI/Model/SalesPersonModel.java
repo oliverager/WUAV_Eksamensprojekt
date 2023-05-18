@@ -22,6 +22,28 @@ public class SalesPersonModel {
         salesPersonManager = new SalesPersonManager();
         allCustomer = new ArrayList<>();
         customerObservableList = FXCollections.observableArrayList();
-        //customerObservableList.addAll(salesPersonManager.getAllCustomers());
+        customerObservableList.addAll(salesPersonManager.getAllCustomers());
+    }
+    public List<Customer> getAllCustomers() throws Exception {
+        return allCustomer;
+    }
+
+    public void createCustomer(Customer customer) throws Exception {
+        Customer newCustomer = salesPersonManager.createCustomer(customer);
+        customerObservableList.add(newCustomer);
+        allCustomer.add(newCustomer);
+    }
+
+    public void updateCustomer(Customer updatedCustomer, Customer oldCustomer) throws Exception {
+        customerObservableList.remove(oldCustomer);
+        allCustomer.remove(oldCustomer);
+        salesPersonManager.updateCustomer(updatedCustomer);
+        customerObservableList.add(updatedCustomer);
+        allCustomer.add(updatedCustomer);
+    }
+    public void deleteCustomer(Customer customer) throws Exception {
+        customerObservableList.remove(customer);
+        allCustomer.remove(customer);
+        salesPersonManager.deleteCustomer(customer);
     }
 }

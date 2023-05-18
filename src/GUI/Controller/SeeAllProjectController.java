@@ -32,13 +32,12 @@ public class SeeAllProjectController extends BaseController {
     @FXML
     private TableView<Project> tbvProject;
     private String lastSelectedItemType;
-    private MainController mainController;
 
     @Override
     public void setup() throws IOException {
 
         try {
-            getModelsHandler().getProjectManagerModel().getAllProject();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,13 +77,13 @@ public class SeeAllProjectController extends BaseController {
         String search = txtSearchBar.getText().toLowerCase();
 
         if(search != null)
-            getModelsHandler().getAdminModel().searchUsers(search);
+            getModelsHandler().getProjectManagerModel().searchProjects(search);
         else if (search == null){
-            getModelsHandler().getAdminModel().clearSearch();
+            getModelsHandler().getProjectManagerModel().clearSearch();
         }
     }
     public void handleSearch(KeyEvent keyEvent) {
-        //search();
+        search();
     }
 
 

@@ -30,8 +30,8 @@ public class MainController extends BaseController {
     @FXML
     private Button btn1, btn2, btn3;
     private Alert alert;
-    private ProjectController projectController;
-    private SeeAllProjectController seeAllProjectController;
+    //private ProjectController projectController;
+    //private SeeAllProjectController seeAllProjectController;
 
     private void openCreateProjectView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateProjectView.fxml"));
@@ -48,8 +48,9 @@ public class MainController extends BaseController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/SeeAllProjectsView.fxml"));
         Parent view = loader.load();
 
-        BaseController controller = loader.getController();
+        SeeAllProjectController controller = loader.getController();
         controller.setModel(new ModelsHandler());
+        controller.setMainController(this);
         controller.setup();
 
         contentArea.getChildren().removeAll();
@@ -61,6 +62,7 @@ public class MainController extends BaseController {
 
         BaseController controller = loader.getController();
         controller.setModel(new ModelsHandler());
+        controller.setMainController(this);
         controller.setup();
 
         contentArea.getChildren().removeAll();
@@ -70,9 +72,11 @@ public class MainController extends BaseController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/ProjectView.fxml"));
         Parent view = loader.load();
 
-        BaseController controller = loader.getController();
+        ProjectController controller = loader.getController();
         controller.setModel(new ModelsHandler());
-        projectController.setOpenedProject(seeAllProjectController.getSelectedProject());
+        controller.setMainController(this);
+
+        //controller.setOpenedProject();
         controller.setup();
 
         contentArea.getChildren().removeAll();
@@ -84,6 +88,7 @@ public class MainController extends BaseController {
 
         BaseController controller = loader.getController();
         controller.setModel(new ModelsHandler());
+        controller.setMainController(this);
         controller.setup();
 
         contentArea.getChildren().removeAll();
@@ -96,6 +101,7 @@ public class MainController extends BaseController {
 
         BaseController controller = loader.getController();
         controller.setModel(new ModelsHandler());
+        controller.setMainController(this);
         controller.setup();
 
         contentArea.getChildren().removeAll();
@@ -107,6 +113,7 @@ public class MainController extends BaseController {
 
         BaseController controller = loader.getController();
         controller.setModel(new ModelsHandler());
+        controller.setMainController(this);
         controller.setup();
 
         contentArea.getChildren().removeAll();
@@ -119,7 +126,7 @@ public class MainController extends BaseController {
                 openCreateProjectView();
             } else if (btn1.getText().equals("Opret ny Bruger")) {
                 openCreateUserView();
-            } else if (btn1.getText().equals("Opret ny Kunde")) {
+            } else if (btn1.getText().equals("Opret ny kunde")) {
                 openCreateCustomerView();
             }
         } catch (Exception e) {
@@ -131,10 +138,12 @@ public class MainController extends BaseController {
     @FXML
     public void handleButton2(ActionEvent event) {
         try {
-            if (btn2.getText().equals("Opret ny Kunde")) {
+            if (btn2.getText().equals("Opret ny kunde")) {
                 openCreateCustomerView();
             } else if (btn2.getText().equals("Se alle Bruger")) {
                 openSeeAllUserView();
+            } else if (btn2.getText().equals("Se alle kunder")) {
+                openSeeAllCustomerView();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,7 +153,14 @@ public class MainController extends BaseController {
 
     @FXML
     public void handleButton3(ActionEvent event) {
-
+        try {
+            if (btn3.getText().equals("Opret ny kunde")) {
+                openCreateCustomerView();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ExceptionHandler.displayError(new Exception("Failed to do action pleas try again", e));
+        }
     }
 
     @FXML
@@ -192,7 +208,6 @@ public class MainController extends BaseController {
         dragScreen();
 
         try {
-            getModelsHandler().getProjectManagerModel().getAllProject();
             checkUserAndSetup();
             //grantingAccess();
             openSeeAllProjectView();
@@ -241,9 +256,8 @@ public class MainController extends BaseController {
     private void setupProjectManager() {
         lblUsertype.setText("Projekt Manager");
         btn1.setText("Opret nyt Projekt");
-        btn2.setText("Opret ny Kunde");
-        btn3.setDisable(true);
-        btn3.setVisible(false);
+        btn2.setText("Se alle kunder");
+        btn3.setText("Opret ny kunde");
     }
     private void setupTechnician() {
         lblUsertype.setText("Tekniker");
@@ -255,9 +269,8 @@ public class MainController extends BaseController {
     }
     private void setupSalesPerson() {
         lblUsertype.setText("Sælger");
-        btn1.setText("Opret ny Kunde");
-        btn2.setDisable(true);
-        btn2.setVisible(false);
+        btn1.setText("Opret ny kunde");
+        btn2.setText("Se alle kunder");
         btn3.setDisable(true);
         btn3.setVisible(false);
     }

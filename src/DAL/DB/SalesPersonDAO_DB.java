@@ -1,10 +1,9 @@
 package DAL.DB;
 
-import BE.Customer.B2B;
-import BE.Customer.B2C;
-import BE.Customer.B2G;
+import BE.Customer.Business;
+import BE.Customer.Private;
+import BE.Customer.Government;
 import BE.Customer.Customer;
-import BE.Project;
 import DAL.DatabaseConnector;
 import DAL.Interface.ISalesPersonDAO;
 
@@ -23,8 +22,6 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
 
     @Override
     public List<Customer> getAllCustomers() throws Exception {
-        return null;
-        /**
         String sql = "SELECT * FROM [User];";
 
         try (Connection connection = dbConnector.getConnection();
@@ -36,12 +33,12 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
             while (rs.next()) {
                 int id = rs.getInt("Id");
                 String name = rs.getString("Name");
-                double cvr = rs.getDouble("Cvr");
-                String adress = rs.getString("Adress");
+                String cvr = rs.getString("Cvr");
+                String address = rs.getString("Adress");
                 int customerType = rs.getInt("CustomerType");
 
 
-                Customer customer = new Customer(id, name, adress, cvr, customerType);
+                Customer customer = new Customer(id, name, address, cvr, customerType);
                 customerList.add(customer);
             }
             return customerList;
@@ -51,7 +48,6 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
             throw new Exception("Could not get customers from database", e);
 
         }
-         */
     }
 
     @Override
@@ -61,7 +57,7 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
              PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, customer.getName());
-            statement.setDouble(2, customer.getCvrNummer());
+            statement.setString(2, customer.getCvrNummer());
             statement.setString(3, customer.getAddress());
             statement.setInt(4, customer.getCustomertype());
 
@@ -76,14 +72,14 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
 
             Customer newCustomer = null;
 
-            if (customer.getClass().getSimpleName() == B2B.class.getSimpleName()) {
-                newCustomer = new B2B(customer.getCustomerid(), customer.getName(), customer.getAddress(), customer.getCvrNummer());
+            if (customer.getClass().getSimpleName() == Business.class.getSimpleName()) {
+                newCustomer = new Business(customer.getCustomerid(), customer.getName(), customer.getAddress(), customer.getCvrNummer());
             }
-            else if (customer.getClass().getSimpleName() == B2C.class.getSimpleName()) {
-                newCustomer = new B2C(customer.getCustomerid(), customer.getName(), customer.getAddress(), customer.getCvrNummer());
+            else if (customer.getClass().getSimpleName() == Private.class.getSimpleName()) {
+                newCustomer = new Private(customer.getCustomerid(), customer.getName(), customer.getAddress(), customer.getCvrNummer());
             }
-            else if (customer.getClass().getSimpleName() == B2G.class.getSimpleName()) {
-                newCustomer = new B2G(customer.getCustomerid(), customer.getName(), customer.getAddress(), customer.getCvrNummer());
+            else if (customer.getClass().getSimpleName() == Government.class.getSimpleName()) {
+                newCustomer = new Government(customer.getCustomerid(), customer.getName(), customer.getAddress(), customer.getCvrNummer());
             }
             return newCustomer;
         }
@@ -109,5 +105,10 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
             e.printStackTrace();
             throw new Exception("Kunne ikke opdatere kunde", e);
         }
+    }
+
+    @Override
+    public void deleteCustomer(Customer customer) throws Exception {
+        //TODO deleteCustomer
     }
 }

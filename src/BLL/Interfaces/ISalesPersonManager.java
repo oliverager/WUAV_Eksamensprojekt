@@ -13,4 +13,6 @@ public interface ISalesPersonManager {
     Customer createCustomer(Customer customer) throws Exception;
 
     void updateCustomer(Customer customer) throws Exception;
+
+    void deleteCustomer(Customer customer) throws Exception;
 }

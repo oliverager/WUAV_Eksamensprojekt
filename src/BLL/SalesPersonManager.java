@@ -30,4 +30,9 @@ public class SalesPersonManager implements ISalesPersonManager {
     public void updateCustomer(Customer customer) throws Exception {
         databaseAcces.updateCustomer(customer);
     }
+
+    @Override
+    public void deleteCustomer(Customer customer) throws Exception {
+        databaseAcces.deleteCustomer(customer);
+    }
 }

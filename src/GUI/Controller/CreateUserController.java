@@ -48,13 +48,13 @@ public class CreateUserController extends BaseController {
         try {
             if (getModelsHandler().getAdminModel().checkUserName(userName)) {
                 System.out.println("username is not the same");
-                if (cbUserType.getItems().equals(Admin.class.getSimpleName())) {
+                if (cbUserType.getValue().equals(Admin.class.getSimpleName())) {
                     newUser = new Admin(passWord, userName, name);
-                } else if (cbUserType.getItems().equals(Technician.class.getSimpleName())) {
+                } else if (cbUserType.getValue().equals(Technician.class.getSimpleName())) {
                     newUser = new Technician(passWord, userName, name);
-                } else if (cbUserType.getItems().equals(ProjectManager.class.getSimpleName())) {
+                } else if (cbUserType.getValue().equals(ProjectManager.class.getSimpleName())) {
                     newUser = new ProjectManager(passWord, userName, name);
-                } else if (cbUserType.getItems().equals(SalesPerson.class.getSimpleName())) {
+                } else if (cbUserType.getValue().equals(SalesPerson.class.getSimpleName())) {
                     newUser = new SalesPerson(passWord, userName, name);
                 }
                 if (newUser != null) {
@@ -67,6 +67,7 @@ public class CreateUserController extends BaseController {
                 alert.showAndWait();
             }
         } catch (Exception e) {
+            e.printStackTrace();
             ExceptionHandler.displayError(new Exception("Failed to create user please try again", e));
         }
     }
