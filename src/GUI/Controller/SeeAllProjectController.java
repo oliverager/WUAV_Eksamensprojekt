@@ -36,12 +36,6 @@ public class SeeAllProjectController extends BaseController {
     @Override
     public void setup() throws IOException {
 
-        try {
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         tbcId.setCellValueFactory(new PropertyValueFactory<Project, Integer>("projectid"));
         tbcName.setCellValueFactory(new PropertyValueFactory<Project, String>("name"));
         tbcCustomer.setCellValueFactory(new PropertyValueFactory<Project, String>("customerid"));
@@ -61,7 +55,7 @@ public class SeeAllProjectController extends BaseController {
 
     private void checkSelectedItemType() throws Exception {
         if (tbvProject.getSelectionModel().getSelectedItem() != null && lastSelectedItemType.equals("Project")) {
-            mainController.openProjectView();
+            setMainController(mainController.openProjectView());
         }
     }
     public Project getSelectedProject() {
@@ -82,7 +76,8 @@ public class SeeAllProjectController extends BaseController {
             getModelsHandler().getProjectManagerModel().clearSearch();
         }
     }
-    public void handleSearch(KeyEvent keyEvent) {
+    @FXML
+    private void handleSearch(KeyEvent keyEvent) {
         search();
     }
 

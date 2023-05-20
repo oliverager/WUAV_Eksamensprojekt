@@ -1,6 +1,7 @@
 package GUI.Controller;
 
 import BE.UserType.*;
+import GUI.Util.AlertOpener;
 import GUI.Util.ExceptionHandler;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -9,8 +10,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
-import org.controlsfx.control.textfield.TextFields;
 
 import java.io.IOException;
 
@@ -22,20 +21,29 @@ public class CreateUserController extends BaseController {
     private Button btnCreateUser;
     @FXML
     private TextField txtName, txtUsername, txtPassWord;
-    private MainController mainController;
 
+    private User selectedUser;
+
+    public void setCreateUser(User user) {
+        this.selectedUser = user;
+    }
 
     @Override
     public void setup() throws IOException {
         cbUserType.setItems(FXCollections.observableArrayList("Admin", "Technician", "ProjectManager", "SalesPerson"));
     }
     @FXML
-    private void handleCreateUser(ActionEvent actionEvent) {
-        createUser();
+    private void handleCreateUser(ActionEvent actionEvent) throws Exception {
+        if (checkTextFieldsNotNull()) {
+            createUser();
+            exit();
+        }
+        else
+            AlertOpener.validationError("Mangler at udfylde felter");
     }
 
     private void exit() throws Exception {
-        mainController.openProjectView();
+        setMainController(mainController.openSeeAllUserView());
     }
 
     private void createUser() {
@@ -72,7 +80,31 @@ public class CreateUserController extends BaseController {
         }
     }
 
-    @FXML
-    private void getSelectedType(ActionEvent actionEvent) {
+    private boolean checkTextFieldsNotNull(){
+        if (checktxtName() && checktxtUserName() && checktxtPassWord() && checkcbUserType()){
+            return true;
+        }
+        else
+            return false;
+    }
+
+    private boolean checkcbUserType() {
+        if (!cbUserType.getValue().isEmpty() && cbUserType.getValue() != null) return true;
+        else return false;
+    }
+
+    private boolean checktxtUserName() {
+        if (!txtUsername.getText().isEmpty() && txtUsername.getText() != null) return true;
+        else return false;
+    }
+
+    private boolean checktxtName() {
+        if (!txtName.getText().isEmpty() && txtName.getText() != null) return true;
+        else return false;
+    }
+
+    private boolean checktxtPassWord() {
+        if (!txtPassWord.getText().isEmpty() && txtPassWord.getText() != null) return true;
+        else return false;
     }
 }

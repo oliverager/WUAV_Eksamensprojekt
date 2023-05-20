@@ -1,12 +1,15 @@
 package GUI.Controller;
 
 import BE.Customer.Customer;
+import BE.UserType.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
@@ -23,6 +26,7 @@ public class SeeAllCustomerController extends BaseController {
     private TableColumn<Customer, String> tbcCustomerType;
     @FXML
     private TextField txtSearchBar;
+    private String lastSelectedItemType;
 
     @Override
     public void setup() throws IOException {
@@ -39,14 +43,35 @@ public class SeeAllCustomerController extends BaseController {
         String search = txtSearchBar.getText().toLowerCase();
 
         if(search != null)
-            getModelsHandler().getAdminModel().searchUsers(search);
+            getModelsHandler().getSalesPersonModel().searchCustomers(search);
         else if (search == null){
-            getModelsHandler().getAdminModel().clearSearch();
+            getModelsHandler().getSalesPersonModel().clearSearch();
         }
+    }
+
+    public Customer getSelectedCustomer() {
+        Customer customer = tbvCustomer.getSelectionModel().getSelectedItem();
+        if (customer != null) {
+            return customer;
+        } else
+            return null;
     }
 
     @FXML
     private void handleSearch(KeyEvent keyEvent) {
-        //search();
+        search();
+    }
+
+    public void clickOnProject(MouseEvent mouseEvent) throws Exception {
+        if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2) {
+            lastSelectedItemType = "Customer";
+            checkSelectedItemType();
+        }
+    }
+
+    private void checkSelectedItemType() throws Exception {
+        if (tbvCustomer.getSelectionModel().getSelectedItem() != null && lastSelectedItemType.equals("Project")) {
+            setMainController(mainController.openCreateCustomerView());
+        }
     }
 }

@@ -14,11 +14,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/LoginView.fxml"));
-
-
         Parent root = loader.load();
-        Scene scene = new Scene(root);
 
+        Scene scene = new Scene(root);
 
         BaseController controller = loader.getController();
         controller.setModel(new ModelsHandler());

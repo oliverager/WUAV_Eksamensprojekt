@@ -12,7 +12,7 @@
             prefHeight="750.0" prefWidth="800.0">
     <children>
         <Label layoutX="50.0" layoutY="50.0" styleClass="Title" text="Se alle Kunder" />
-        <TableView fx:id="tbvCustomer" layoutX="50.0" layoutY="150.0" prefWidth="700.0">
+        <TableView fx:id="tbvCustomer" layoutX="50.0" layoutY="150.0" onMouseClicked="#clickOnProject" prefWidth="700.0">
             <columns>
                 <TableColumn fx:id="tbcId" prefWidth="100.0" text="Id" />
                 <TableColumn fx:id="tbcName" prefWidth="250.0" text="Navn" />

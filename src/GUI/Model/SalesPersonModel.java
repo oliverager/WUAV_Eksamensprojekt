@@ -46,4 +46,23 @@ public class SalesPersonModel {
         allCustomer.remove(customer);
         salesPersonManager.deleteCustomer(customer);
     }
+
+    public void searchCustomers(String query) {
+        if (allCustomer.isEmpty())
+            allCustomer.addAll(customerObservableList);
+        else customerObservableList.clear();
+
+        for (Customer c : allCustomer) {
+
+            boolean nameContains = c.getName().toLowerCase().contains(query);
+
+            boolean addCustomers = nameContains;
+
+            if (addCustomers) customerObservableList.add(c);
+        }
+    }
+    public void clearSearch() {
+        customerObservableList.clear();
+        customerObservableList.addAll(allCustomer);
+    }
 }

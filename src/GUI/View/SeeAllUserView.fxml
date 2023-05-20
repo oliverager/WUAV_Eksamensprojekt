@@ -10,7 +10,7 @@
 <Pane prefHeight="750.0" prefWidth="800.0" stylesheets="@../Css/Main_Css.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.SeeAllUserController">
     <children>
         <Label layoutX="50.0" layoutY="50.0" styleClass="Title" text="Se alle Bruger" />
-        <TableView fx:id="tbvUser" layoutX="50.0" layoutY="150.0" prefWidth="700.0">
+        <TableView fx:id="tbvUser" layoutX="50.0" layoutY="150.0" onMouseClicked="#clickOnProject" prefWidth="700.0">
             <columns>
                 <TableColumn fx:id="tbcId" prefWidth="50.0" text="Id" />
                 <TableColumn fx:id="tbcName" prefWidth="400.0" text="Navn" />

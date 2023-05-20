@@ -100,9 +100,8 @@ public class LoginController extends BaseController {
         dragScreen();
     }
 
-    public void handleEnter(KeyEvent keyEvent) throws IOException {
+    public void handleEnter(KeyEvent keyEvent) {
         if (keyEvent.getCode().equals(KeyCode.ENTER)){
-            openMainView();
             handleLogin();
         }
     }

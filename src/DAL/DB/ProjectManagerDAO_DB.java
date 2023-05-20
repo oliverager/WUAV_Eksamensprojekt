@@ -70,6 +70,7 @@ public class ProjectManagerDAO_DB implements IProjectManagerDAO {
 
             ResultSet rs = statement.getGeneratedKeys();
             int id = 0;
+
             if(rs.next()) {
                 id = rs.getInt(1);
             }

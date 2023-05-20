@@ -1,5 +1,7 @@
 package BE;
 
+import javafx.scene.image.Image;
+
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -21,20 +23,19 @@ public class Project {
         this.date = date;
         this.layout = layout;
         this.description = description;
-        Images = images;
+        this.Images = images;
         this.status = status;
         this.techniciansid = techniciansid;
         this.customerid = customerid;
     }
 
-    public Project(int id, String name, LocalDate date, String layout, String description, String images, int techniciansid, int customerid) {
-        this.projectid = id;
+    public Project(String name, LocalDate date, String layout, String description, String images, boolean status, int techniciansid, int customerid) {
         this.name = name;
         this.date = date;
         this.layout = layout;
         this.description = description;
-        Images = images;
-        this.status = false;
+        this.Images = images;
+        this.status = status;
         this.techniciansid = techniciansid;
         this.customerid = customerid;
 

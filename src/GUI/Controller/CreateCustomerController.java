@@ -4,6 +4,8 @@ import BE.Customer.Business;
 import BE.Customer.Private;
 import BE.Customer.Government;
 import BE.Customer.Customer;
+import BE.UserType.User;
+import GUI.Util.AlertOpener;
 import GUI.Util.ExceptionHandler;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -19,15 +21,34 @@ public class CreateCustomerController extends BaseController {
     @FXML
     private ComboBox<String> cbCustomerType;
 
+    private Customer selectedCustomer;
+
+    public void setCreateCustomer(Customer customer) {
+        this.selectedCustomer = customer;
+    }
+
     @Override
     public void setup() throws IOException {
         cbCustomerType.setItems(FXCollections.observableArrayList("Business", "Private", "Government"));
     }
 
+    @FXML
+    private void handleCreateUser(ActionEvent event) throws Exception {
+        if (checkTextFieldsNotNull()) {
+            createCustomer();
+            exit();
+        }
+        else
+            AlertOpener.validationError("Mangler at udfylde felter");
+    }
+    private void exit() throws Exception {
+        setMainController(mainController.openSeeAllCustomerView());
+    }
+
     private void createCustomer() {
         String name = txtName.getText();
         String address = txtAddress.getText();
-        String cvr = (txtCvr.getText());
+        String cvr = txtCvr.getText();
 
         Customer newCustomer = null;
 
@@ -42,6 +63,7 @@ public class CreateCustomerController extends BaseController {
             }
             if (newCustomer != null) {
                 getModelsHandler().getSalesPersonModel().createCustomer(newCustomer);
+
             }
 
         } catch (Exception e) {
@@ -50,12 +72,26 @@ public class CreateCustomerController extends BaseController {
         }
     }
 
-    @FXML
-    private void handleCreateUser(ActionEvent event) {
-        createCustomer();
+    private boolean checkTextFieldsNotNull() {
+        if (checktxtName() && checktxtAddress() && checkcbCustomerType()){
+            return true;
+        }
+        else
+            return false;
     }
 
-    @FXML
-    private void getSelectedType(ActionEvent event) {
+    private boolean checkcbCustomerType() {
+        if (!cbCustomerType.getValue().isEmpty() && cbCustomerType.getValue() != null) return true;
+        else return false;
+    }
+
+    private boolean checktxtAddress() {
+        if (!txtAddress.getText().isEmpty() && txtAddress.getText() != null) return true;
+        else return false;
+    }
+
+    private boolean checktxtName() {
+        if (!txtName.getText().isEmpty() && txtName.getText() != null) return true;
+        else return false;
     }
 }

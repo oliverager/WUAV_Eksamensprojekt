@@ -22,7 +22,7 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
 
     @Override
     public List<Customer> getAllCustomers() throws Exception {
-        String sql = "SELECT * FROM [User];";
+        String sql = "SELECT * FROM [Customer];";
 
         try (Connection connection = dbConnector.getConnection();
             PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -54,7 +54,7 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
     public Customer createCustomer(Customer customer) throws Exception {
         String sql = "INSERT INTO [Customer] (Name, Cvr, Adress, CustomerType) VALUES (?,?,?,?);";
         try (Connection connection = dbConnector.getConnection();
-             PreparedStatement statement = connection.prepareStatement(sql)) {
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setString(1, customer.getName());
             statement.setString(2, customer.getCvrNummer());
@@ -73,19 +73,19 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
             Customer newCustomer = null;
 
             if (customer.getClass().getSimpleName() == Business.class.getSimpleName()) {
-                newCustomer = new Business(customer.getCustomerid(), customer.getName(), customer.getAddress(), customer.getCvrNummer());
+                newCustomer = new Business(id, customer.getName(), customer.getAddress(), customer.getCvrNummer());
             }
             else if (customer.getClass().getSimpleName() == Private.class.getSimpleName()) {
-                newCustomer = new Private(customer.getCustomerid(), customer.getName(), customer.getAddress(), customer.getCvrNummer());
+                newCustomer = new Private(id, customer.getName(), customer.getAddress(), customer.getCvrNummer());
             }
             else if (customer.getClass().getSimpleName() == Government.class.getSimpleName()) {
-                newCustomer = new Government(customer.getCustomerid(), customer.getName(), customer.getAddress(), customer.getCvrNummer());
+                newCustomer = new Government(id, customer.getName(), customer.getAddress(), customer.getCvrNummer());
             }
             return newCustomer;
         }
         catch (SQLException e) {
             e.printStackTrace();
-            throw new Exception("Kunne ikke oprette kunde", e);
+            throw new Exception("Failed to create Customer", e);
         }
     }
 

@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 .root{
-    -fx-font-family: 'Russo One', sans-serif;;
     -fx-background-color: #F5F5F5;
 }
 .Title {
@@ -87,9 +86,9 @@
 }
 .pane-button {
     -fx-background-color: #E84911;
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: #000000;
     -fx-font-family: 'Russo One', sans-serif;
-    -fx-font-size: 20px;
+    -fx-font-size: 16px;
 }
 .pane-button:hover {
     -fx-cursor: hand;
