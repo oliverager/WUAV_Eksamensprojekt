@@ -3,6 +3,7 @@ package DAL.DB;
 
 import BE.Project;
 import BE.UserType.Technician;
+import BE.UserType.User;
 import DAL.DatabaseConnector;
 import DAL.Interface.IProjectManagerDAO;
 
@@ -123,6 +124,35 @@ public class ProjectManagerDAO_DB implements IProjectManagerDAO {
         }
     }
 
+    @Override
+    public void assignProjectToUser(User user, Project project) throws Exception {
+        String sql = "INSERT INTO WorkingOnProjects (Project_Id, Technicians_Id) VALUES (?, ?);";
+        try (Connection connection = dbConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            statement.setInt(1, project.getProjectid());
+            statement.setInt(2, user.getUserId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to create Event_Coordinator relations", e);
+        }
+    }
+
+    @Override
+    public void removeUserFromProject(User user, Project project) throws Exception {
+        String sql = "DELETE INTO WorkingOnProjects WHERE Technicians_Id = ? AND Project_Id;";
+        try (Connection connection = dbConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            statement.setInt(1, project.getProjectid());
+            statement.setInt(2, user.getUserId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Failed to remove " + user.getClass().getSimpleName(), e);
+        }
+    }
 
 
 

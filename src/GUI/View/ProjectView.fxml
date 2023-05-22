@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
 <Pane prefHeight="750.0" prefWidth="800.0" stylesheets="@../Css/Main_Css.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.ProjectController">
    <children>
@@ -13,11 +16,27 @@
       <Label layoutX="50.0" layoutY="170.0" styleClass="Text_Label" text="Kundenavn" />
       <Label layoutX="50.0" layoutY="220.0" styleClass="Text_Label" text="Projekt Status" />
       <Label layoutX="50.0" layoutY="270.0" styleClass="Text_Label" text="Beskrivelse" />
-      <TextArea fx:id="txaProjectDescription" layoutX="50.0" layoutY="300.0" prefHeight="400.0" prefWidth="350.0" />
+      <TextArea fx:id="txaProjectDescription" layoutX="50.0" layoutY="300.0" prefHeight="350.0" prefWidth="350.0" />
       <Label fx:id="lblProjectDate" layoutX="200.0" layoutY="120.0" styleClass="Text_Label" text="null" />
       <Label fx:id="lblCustomerName" layoutX="200.0" layoutY="170.0" styleClass="Text_Label" text="null" />
       <Label fx:id="lblProjectStatus" layoutX="200.0" layoutY="220.0" styleClass="Text_Label" text="null" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="513.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
-      <ListView fx:id="lvAssignTechnician" layoutX="550.0" layoutY="50.0" prefHeight="200.0" prefWidth="200.0" />
+      <ListView fx:id="lvAssignTechnician" layoutX="450.0" layoutY="500.0" prefHeight="150.0" prefWidth="300.0" />
+      <HBox layoutX="50.0" layoutY="684.0" prefHeight="36.0" prefWidth="700.0" spacing="10.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#handlePrintDocumentation" prefHeight="36.0" styleClass="pane-button" text="Print PDF" />
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleEditProject" prefHeight="36.0" styleClass="pane-button" text="Ret Projektet" />
+            <Button layoutX="110.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleDeleteProject" prefHeight="36.0" styleClass="pane-button" text="Slet Projektet" />
+            <Button layoutX="271.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleAssignTechnicians" prefHeight="36.0" styleClass="pane-button" text="Tilføj Teknikere" />
+            <Button mnemonicParsing="false" onAction="#handleRemoveTechnicians" prefHeight="36.0" styleClass="pane-button" text="Fjern Teknikere" />
+         </children>
+      </HBox>
+      <VBox layoutX="450.0" layoutY="50.0" prefHeight="450.0" prefWidth="300.0">
+         <children>
+            <ImageView fx:id="imgLayout" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgImage1" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </VBox>
    </children>
 </Pane>

@@ -28,9 +28,7 @@ public class AdminModel {
         adminManager = new AdminManager();
         allUsers = new ArrayList<>();
         userObservableList = FXCollections.observableArrayList();
-        userObservableList.addAll(adminManager.getAllUsers());
         currentProjectTechnician = FXCollections.observableArrayList();
-        //currentProjectTechnician.addAll(adminManager.getUsersWorkingOnProject());
     }
     public void createUser(User user) throws Exception {
         User newUser = adminManager.createUser(user);
@@ -44,6 +42,14 @@ public class AdminModel {
     }
     public List<User> getAllUsers() {
         return allUsers;
+    }
+
+    public void retreiveAllUsers() throws Exception {
+        List<User> techniciansList = adminManager.getAllUsers();
+        userObservableList.clear();
+        allUsers.clear();
+        userObservableList.addAll(techniciansList);
+        allUsers.addAll(userObservableList);
     }
 
     public void updateUser(User updatedUser, User oldUser) throws Exception{

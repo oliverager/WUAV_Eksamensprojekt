@@ -3,6 +3,7 @@ package DAL.Interface;
 import BE.Customer.Customer;
 import BE.Project;
 import BE.UserType.Technician;
+import BE.UserType.User;
 
 import java.util.List;
 
@@ -15,4 +16,8 @@ public interface IProjectManagerDAO {
     void updateProject(Project project) throws Exception;
 
     void updateStatus(Project project) throws Exception;
+
+    void assignProjectToUser(User user, Project project) throws Exception;
+
+    void removeUserFromProject(User user, Project project) throws Exception;
 }

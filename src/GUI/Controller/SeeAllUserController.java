@@ -35,6 +35,13 @@ public class SeeAllUserController extends BaseController {
     @Override
     public void setup() throws IOException {
 
+        try {
+            getModelsHandler().getAdminModel().retreiveAllUsers();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
         tbcId.setCellValueFactory(new PropertyValueFactory<User, Integer>("userId"));
         tbcName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         tbcUserType.setCellValueFactory(new PropertyValueFactory<User, Integer>("userType"));
@@ -60,14 +67,14 @@ public class SeeAllUserController extends BaseController {
     }
 
     public void clickOnProject(MouseEvent mouseEvent) throws Exception {
+        lastSelectedItemType = "User";
         if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2) {
-            lastSelectedItemType = "User";
             checkSelectedItemType();
         }
     }
 
     private void checkSelectedItemType() throws Exception {
-        if (tbvUser.getSelectionModel().getSelectedItem() != null && lastSelectedItemType.equals("Project")) {
+        if (tbvUser.getSelectionModel().getSelectedItem() != null && lastSelectedItemType.equals("User")) {
             setMainController(mainController.openCreateCustomerView());
         }
     }

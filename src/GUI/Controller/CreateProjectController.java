@@ -3,14 +3,21 @@ package GUI.Controller;
 import BE.Customer.Customer;
 import BE.Project;
 import BE.UserType.Technician;
+import BE.UserType.User;
 import GUI.Util.AlertOpener;
 import GUI.Util.ExceptionHandler;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -19,9 +26,9 @@ public class CreateProjectController extends BaseController{
     @FXML
     private ListView<Technician> lvAssignTechnicians;
     @FXML
-    private ComboBox<Technician> assignTechnicians;
+    private Button assignTechnicians;
     @FXML
-    private ImageView imgLayout, imgImage;
+    private ImageView imgLayout, imgImage, imgImage1;
     @FXML
     private ComboBox<Customer> cbCustomer;
     @FXML
@@ -34,6 +41,7 @@ public class CreateProjectController extends BaseController{
     @Override
     public void setup() throws IOException {
         cbCustomer.setItems(getModelsHandler().getSalesPersonModel().getAllCustomer());
+
     }
 
     private void createProject() {
@@ -62,10 +70,40 @@ public class CreateProjectController extends BaseController{
 
     @FXML
     private void handleAssignTechnicians(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/AssignTechniciansView.fxml"));
+        Parent root = null;
+
+        try {
+            root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.getIcons().add(new Image("/GUI/Images/WUAVlogo.png"));
+
+            AssignTechniciansController controller = loader.getController();
+            controller.setModel(getModelsHandler());
+            controller.setOpenedProject(project);
+
+            controller.setup();
+
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            ExceptionHandler.displayError(new Exception("Kunne ikke åbne tilføre tekniker vinduet", e));
+        }
     }
 
     @FXML
     private void handleRemoveTechnicians(ActionEvent actionEvent) {
+        if (lvAssignTechnicians.getSelectionModel().getSelectedItem() != null) {
+            try {
+                getModelsHandler().getProjectManagerModel().removeUserFromProject(lvAssignTechnicians.getSelectionModel().getSelectedItem(), project);
+            } catch (Exception e) {
+                ExceptionHandler.displayError(new Exception("Kunne ikke fjerne teknikerne fra projektet", e));
+            }
+        }
     }
 
     @FXML

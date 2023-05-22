@@ -4,6 +4,8 @@ import BE.Customer.Business;
 import BE.Customer.Private;
 import BE.Customer.Government;
 import BE.Customer.Customer;
+import BE.Project;
+import BE.UserType.User;
 import DAL.DatabaseConnector;
 import DAL.Interface.ISalesPersonDAO;
 
@@ -111,4 +113,6 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
     public void deleteCustomer(Customer customer) throws Exception {
         //TODO deleteCustomer
     }
+
+
 }

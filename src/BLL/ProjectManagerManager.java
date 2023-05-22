@@ -3,6 +3,7 @@ package BLL;
 import BE.Customer.Customer;
 import BE.Project;
 import BE.UserType.Technician;
+import BE.UserType.User;
 import BLL.Interfaces.IProjectManagerManager;
 import DAL.DB.ProjectManagerDAO_DB;
 import DAL.DatabaseConnector;
@@ -36,5 +37,15 @@ public class ProjectManagerManager implements IProjectManagerManager {
     @Override
     public void updateStatus(Project project) throws Exception {
         databaseAcces.updateProject(project);
+    }
+
+    @Override
+    public void assignProjectToUser(User user, Project project) throws Exception {
+        databaseAcces.assignProjectToUser(user, project);
+    }
+
+    @Override
+    public void removeUserFromProject(User user, Project project) throws Exception {
+        databaseAcces.removeUserFromProject(user, project);
     }
 }

@@ -2,6 +2,7 @@ package DAL.Interface;
 
 import BE.Customer.Customer;
 import BE.Project;
+import BE.UserType.User;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface ISalesPersonDAO {
     void updateCustomer(Customer customer) throws Exception;
 
     void deleteCustomer(Customer customer) throws Exception;
+
 }

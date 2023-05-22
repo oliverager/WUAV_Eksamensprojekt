@@ -18,6 +18,7 @@ public class ProjectManagerModel {
     private ObservableList<Project> projectObservableList;
     private ObservableList<User> currentProjectTechnician;
 
+
     public ProjectManagerModel() throws Exception {
         projectManagerManager = new ProjectManagerManager();
         allProjects = new ArrayList<>();
@@ -46,8 +47,22 @@ public class ProjectManagerModel {
         projectManagerManager.updateProject(updatedProject);
         projectObservableList.add(updatedProject);
     }
-    public void removeProjectFromLocal(Project project) {
-        projectObservableList.remove(project);
+
+    public void updateStatus(Project updatedProject, Project oldProject) throws Exception {
+        projectObservableList.remove(oldProject);
+        projectManagerManager.updateStatus(updatedProject);
+        projectObservableList.add(updatedProject);
+    }
+
+    public void assignProjectToUser(User user, Project project) throws Exception {
+        projectManagerManager.assignProjectToUser(user, project);
+        currentProjectTechnician.add(user);
+    }
+
+    public void removeUserFromProject(User user, Project project) throws Exception {
+        projectManagerManager.removeUserFromProject(user, project);
+        currentProjectTechnician.remove(user);
+
     }
 
     public void searchProjects(String query) {

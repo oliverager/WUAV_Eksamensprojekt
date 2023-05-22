@@ -63,14 +63,14 @@ public class SeeAllCustomerController extends BaseController {
     }
 
     public void clickOnProject(MouseEvent mouseEvent) throws Exception {
+        lastSelectedItemType = "Customer";
         if (mouseEvent.getButton() == MouseButton.PRIMARY && mouseEvent.getClickCount() == 2) {
-            lastSelectedItemType = "Customer";
             checkSelectedItemType();
         }
     }
 
     private void checkSelectedItemType() throws Exception {
-        if (tbvCustomer.getSelectionModel().getSelectedItem() != null && lastSelectedItemType.equals("Project")) {
+        if (tbvCustomer.getSelectionModel().getSelectedItem() != null && lastSelectedItemType.equals("Customer")) {
             setMainController(mainController.openCreateCustomerView());
         }
     }

@@ -81,7 +81,7 @@ public class MainController extends BaseController {
         controller.setModel(new ModelsHandler());
         controller.setMainController(this);
 
-        controller.setCreateUser(seeUser.getSelectedUser());
+        controller.setOpenedUser(seeUser.getSelectedUser());
         controller.setup();
 
         contentArea.getChildren().removeAll();
@@ -114,7 +114,7 @@ public class MainController extends BaseController {
         controller.setMainController(this);
 
 
-        controller.setCreateCustomer(seeCustomer.getSelectedCustomer());
+        controller.setOpenedCustomer(seeCustomer.getSelectedCustomer());
         controller.setup();
 
         contentArea.getChildren().removeAll();
@@ -265,7 +265,7 @@ public class MainController extends BaseController {
         if (getModelsHandler().getLoginModel().getLoggedInTechnician() != null) {
             boolean userAccess = false;
             int loggedInUserId = getModelsHandler().getLoginModel().getLoggedInTechnician().getUserId();
-            for (User u : getModelsHandler().getProjectManagerModel().getCurrentProjectTechnician()) {
+            for (User u : getModelsHandler().getAdminModel().getCurrentProjectTechnician()) {
                 if (u.getUserId() == loggedInUserId) {
                     userAccess = true;
                 }
