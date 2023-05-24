@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -37,7 +36,7 @@
                         <Image url="@../Images/WuavLogoWhite.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btn1" mnemonicParsing="false" onAction="#handleButton1" prefHeight="100.0" prefWidth="200.0" styleClass="Nav-bar-Button" text="Opret nyt Projekt" />
+                  <Button fx:id="btn1" mnemonicParsing="false" onAction="#handleButton1" prefHeight="100.0" prefWidth="200.0" styleClass="Nav-bar-Button" text="Opret nyt &#10;Projekt" textAlignment="CENTER" />
                   <Button fx:id="btn2" mnemonicParsing="false" onAction="#handleButton2" prefHeight="100.0" prefWidth="200.0" styleClass="Nav-bar-Button" text="Button" />
                   <Button fx:id="btn3" mnemonicParsing="false" onAction="#handleButton3" prefHeight="100.0" prefWidth="200.0" styleClass="Nav-bar-Button" text="Button" />
                </children>

@@ -100,11 +100,11 @@ public class AdminModel {
         adminManager.deleteProjectRelations(project);
     }
     public List<User> getUsersWorkingOnProject(Project project) throws Exception{
-        List<User> allUsersOnEvent = new ArrayList<>();
+        List<User> allUsersOnProject = new ArrayList<>();
         List<Integer> allUsersId = adminManager.getUsersWorkingOnProject(project);
         for (Integer i:allUsersId){
-            allUsersOnEvent.add(getLocalUserFromId(i));
+            allUsersOnProject.add(getLocalUserFromId(i));
         }
-        return allUsersOnEvent;
+        return allUsersOnProject;
     }
 }

@@ -6,6 +6,7 @@ import BE.UserType.Technician;
 import BE.UserType.User;
 import GUI.Util.AlertOpener;
 import GUI.Util.ExceptionHandler;
+import GUI.Util.SlideshowTask;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,12 +16,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateProjectController extends BaseController{
     @FXML
@@ -28,7 +33,7 @@ public class CreateProjectController extends BaseController{
     @FXML
     private Button assignTechnicians;
     @FXML
-    private ImageView imgLayout, imgImage, imgImage1;
+    private ImageView imageView, imageView1, imageView2, imageView3, imageView4, imageView5;
     @FXML
     private ComboBox<Customer> cbCustomer;
     @FXML
@@ -37,6 +42,11 @@ public class CreateProjectController extends BaseController{
     private TextField txtProjectName;
     @FXML
     private DatePicker txtDate;
+    private final List<Image> images = new ArrayList<>();
+
+    private int currentImageIndex = 0;
+
+    private SlideshowTask slideshowTask;
 
     @Override
     public void setup() throws IOException {
@@ -44,12 +54,12 @@ public class CreateProjectController extends BaseController{
 
     }
 
-    private void createProject() {
+    private void createProject() { 
         String name = txtProjectName.getText();
         LocalDate date = txtDate.getValue();
-        Image layout = imgLayout.getImage();
+        Image layout = imageView.getImage();
         String description = txaDescription.getText();
-        Image image = imgImage.getImage();
+        Image image = imageView1.getImage();
         boolean status = false;
         int assignTechnicians = lvAssignTechnicians.getEditingIndex();
         //int customer = cbCustomer.getValue();
@@ -130,14 +140,48 @@ public class CreateProjectController extends BaseController{
     }
 
     @FXML
-    private void handleUploadLayout(ActionEvent actionEvent) {
-    }
-
-    @FXML
     private void handleUploadImages(ActionEvent actionEvent) {
+        try {
+            fileChooser();
+        } catch (Exception e) {
+            ExceptionHandler.displayError(new Exception("Error Failed to open fileChooser", e));
+        }
     }
 
     private void exit() throws Exception {
         setMainController(mainController.openSeeAllProjectView());
+    }
+    
+    private void fileChooser() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select image files");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images",
+                "*.png", "*.jpg", "*.gif", "*.tif", "*.bmp"));
+        List<File> files = fileChooser.showOpenMultipleDialog(new Stage());
+
+        if (!files.isEmpty())
+        {
+            files.forEach((File f) ->
+            {
+                images.add(new Image(f.toURI().toString()));
+            });
+            displayImage();
+        }
+    }
+
+    private void displayImage() {
+        if (!images.isEmpty()) {
+            for (Image im : images) {
+                
+            }
+
+            imageView.setImage(images.get(currentImageIndex));
+            imageView1.setImage(images.get(currentImageIndex + 1));
+            imageView2.setImage(images.get(currentImageIndex + 2));
+            imageView3.setImage(images.get(currentImageIndex + 3));
+            imageView4.setImage(images.get(currentImageIndex + 4));
+            imageView5.setImage(images.get(currentImageIndex + 5));
+
+        }
     }
 }

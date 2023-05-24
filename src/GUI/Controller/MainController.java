@@ -81,7 +81,7 @@ public class MainController extends BaseController {
         controller.setModel(new ModelsHandler());
         controller.setMainController(this);
 
-        controller.setOpenedUser(seeUser.getSelectedUser());
+        //controller.setOpenedUser(seeUser.getSelectedUser());
         controller.setup();
 
         contentArea.getChildren().removeAll();
@@ -114,7 +114,7 @@ public class MainController extends BaseController {
         controller.setMainController(this);
 
 
-        controller.setOpenedCustomer(seeCustomer.getSelectedCustomer());
+        //controller.setOpenedCustomer(seeCustomer.getSelectedCustomer());
         controller.setup();
 
         contentArea.getChildren().removeAll();
@@ -153,7 +153,7 @@ public class MainController extends BaseController {
     @FXML
     public void handleButton1(ActionEvent event) {
         try {
-            if (btn1.getText().equals("Opret nyt Projekt")) {
+            if (btn1.getText().equals("Opret nyt \n Projekt")) {
                 openCreateProjectView();
             } else if (btn1.getText().equals("Opret ny Bruger")) {
                 openCreateUserView();
@@ -285,13 +285,13 @@ public class MainController extends BaseController {
     }
     private void setupProjectManager() {
         lblUsertype.setText("Projekt Manager");
-        btn1.setText("Opret nyt Projekt");
+        btn1.setText("Opret nyt \n Projekt");
         btn2.setText("Se alle kunder");
         btn3.setText("Opret ny kunde");
     }
     private void setupTechnician() {
         lblUsertype.setText("Tekniker");
-        btn1.setText("Opret nyt Projekt");
+        btn1.setText("Opret nyt \n Projekt");
         btn2.setDisable(true);
         btn2.setVisible(false);
         btn3.setDisable(true);

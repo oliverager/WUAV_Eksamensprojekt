@@ -16,4 +16,9 @@ public class UserType {
     public String getUserTypeName() {
         return userTypeName;
     }
+
+    @Override
+    public String toString() {
+        return userTypeName;
+    }
 }

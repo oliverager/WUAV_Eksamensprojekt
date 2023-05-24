@@ -38,7 +38,7 @@ public class CreateUserController extends BaseController {
         if (!checkShouldEdit()){
             btnEditUser.setDisable(true);
             btnEditUser.setVisible(false);
-            btnCreateUser.setVisible(false);
+            btnDeleteUser.setVisible(false);
             btnDeleteUser.setDisable(true);
             setEditAbleUser(true);
         } else if (checkShouldEdit()) {

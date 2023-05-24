@@ -5,6 +5,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
@@ -23,22 +24,28 @@
       <Label layoutX="50.0" layoutY="250.0" styleClass="Text_Label" text="Kunde" />
       <TextArea fx:id="txaDescription" layoutX="50.0" layoutY="360.0" prefHeight="290.0" prefWidth="350.0" wrapText="true" />
       <ListView fx:id="lvAssignTechnicians" layoutX="450.0" layoutY="500.0" prefHeight="150.0" prefWidth="300.0" />
-      <Label layoutX="50.0" layoutY="320.0" styleClass="Text_Label" text="Kunde" />
+      <Label layoutX="50.0" layoutY="320.0" styleClass="Text_Label" text="Beskrivelser" />
       <HBox layoutX="50.0" layoutY="684.0" prefHeight="36.0" prefWidth="700.0" spacing="10.0">
          <children>
             <Button mnemonicParsing="false" onAction="#handleCreateProject" prefHeight="36.0" styleClass="pane-button" text="Opret projekt" />
-            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleUploadLayout" prefHeight="36.0" styleClass="pane-button" text="Upload Layout" />
             <Button layoutX="110.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleUploadImages" prefHeight="36.0" styleClass="pane-button" text="Upload billeder" />
             <Button layoutX="271.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleAssignTechnicians" prefHeight="36.0" styleClass="pane-button" text="Tilføj Teknikere" />
             <Button mnemonicParsing="false" onAction="#handleRemoveTechnicians" prefHeight="36.0" styleClass="pane-button" text="Fjern Teknikere" />
          </children>
       </HBox>
-      <VBox layoutX="450.0" layoutY="50.0" prefHeight="450.0" prefWidth="300.0">
-         <children>
-            <ImageView fx:id="imgLayout" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="imgImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="imgImage1" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </VBox>
+      <ScrollPane fitToWidth="true" layoutX="450.0" layoutY="50.0" prefHeight="450.0" prefWidth="300.0">
+         <content>
+            <VBox prefWidth="300.0">
+               <children>
+                  <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView2" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView3" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView4" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView5" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
    </children>
 </Pane>
