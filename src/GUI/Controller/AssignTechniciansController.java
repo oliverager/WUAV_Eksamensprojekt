@@ -40,10 +40,10 @@ public class AssignTechniciansController extends BaseController {
     }
 
     private void showTechnicians() {
-        allTechnicians.addAll(getModelsHandler().getAdminModel().getCurrentProjectTechnician());
+        allTechnicians.addAll(getModelsHandler().getAdminModel().getAllUsers());
 
         for (User u : getModelsHandler().getAdminModel().getAllUsers()) {
-            if (u.getClass().getSimpleName() == Technician.class.getSimpleName())
+            if (u.getClass().getSimpleName().equals(Technician.class.getSimpleName()))
                 if (!allTechnicians.contains(u))
                     allTechnicians.add(u);
                 else
@@ -51,9 +51,12 @@ public class AssignTechniciansController extends BaseController {
 
         }
         tbvTechnician.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        tbvTechnician.setItems(allTechnicians);
+        //tbvTechnician.setItems(allTechnicians);
+
         tbcName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         tbcId.setCellValueFactory(new PropertyValueFactory<User, Integer>("userId"));
+
+        tbvTechnician.setItems(getModelsHandler().getAdminModel().getUserObservableList());
     }
 
     @FXML

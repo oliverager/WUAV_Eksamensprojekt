@@ -1,12 +1,15 @@
 package GUI.Model;
 
 import BE.Customer.Customer;
+import BE.Project;
 import BE.UserType.SalesPerson;
 import BLL.Interfaces.ISalesPersonManager;
 import BLL.SalesPersonManager;
+import GUI.Util.PDFGenerator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +27,12 @@ public class SalesPersonModel {
         customerObservableList = FXCollections.observableArrayList();
         customerObservableList.addAll(salesPersonManager.getAllCustomers());
     }
+
+    public void createPdf(Project project, ObservableList<File> files) throws Exception {
+        PDFGenerator pdfGenerator = new PDFGenerator(project, files);
+        pdfGenerator.createDocument();
+    }
+
     public List<Customer> getAllCustomers() throws Exception {
         return allCustomer;
     }

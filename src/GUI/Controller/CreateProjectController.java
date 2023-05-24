@@ -141,11 +141,8 @@ public class CreateProjectController extends BaseController{
 
     @FXML
     private void handleUploadImages(ActionEvent actionEvent) {
-        try {
-            fileChooser();
-        } catch (Exception e) {
-            ExceptionHandler.displayError(new Exception("Error Failed to open fileChooser", e));
-        }
+        fileChooser();
+
     }
 
     private void exit() throws Exception {
