@@ -25,8 +25,6 @@ public class CreateUserController extends BaseController {
 
     private User selectedUser;
 
-
-
     @Override
     public void setup() throws IOException {
         setUpUserInfo();
@@ -157,8 +155,9 @@ public class CreateUserController extends BaseController {
         return false;
     }
 
-    private void exit() throws Exception {
-        setMainController(mainController.openSeeAllUserView());
+    private MainController exit() throws Exception {
+        mainController.openSeeAllUserView();
+        return mainController;
     }
 
     private void createUser() {

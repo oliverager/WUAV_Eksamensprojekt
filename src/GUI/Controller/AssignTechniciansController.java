@@ -51,12 +51,10 @@ public class AssignTechniciansController extends BaseController {
 
         }
         tbvTechnician.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        //tbvTechnician.setItems(allTechnicians);
+        tbvTechnician.setItems(allTechnicians);
 
         tbcName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
         tbcId.setCellValueFactory(new PropertyValueFactory<User, Integer>("userId"));
-
-        tbvTechnician.setItems(getModelsHandler().getAdminModel().getUserObservableList());
     }
 
     @FXML

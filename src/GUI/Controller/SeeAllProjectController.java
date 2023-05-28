@@ -2,6 +2,8 @@ package GUI.Controller;
 
 import BE.Project;
 import GUI.Model.ModelsHandler;
+import GUI.Util.PDFGenerator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,7 +36,7 @@ public class SeeAllProjectController extends BaseController {
     private String lastSelectedItemType;
 
     @Override
-    public void setup() throws IOException {
+    public void setup() {
 
         tbcId.setCellValueFactory(new PropertyValueFactory<Project, Integer>("projectid"));
         tbcName.setCellValueFactory(new PropertyValueFactory<Project, String>("name"));
@@ -53,15 +55,16 @@ public class SeeAllProjectController extends BaseController {
         }
     }
 
-    private void checkSelectedItemType() throws Exception {
+    private MainController checkSelectedItemType() throws Exception {
         if (tbvProject.getSelectionModel().getSelectedItem() != null && lastSelectedItemType.equals("Project")) {
-            setMainController(mainController.openProjectView());
+            mainController.openProjectView();
         }
+        return mainController;
     }
     public Project getSelectedProject() {
-        Project project = tbvProject.getSelectionModel().getSelectedItem();
-        if (project != null) {
-            return project;
+        Project selectedProject = tbvProject.getSelectionModel().getSelectedItem();
+        if (selectedProject != null) {
+            return selectedProject;
         } else
             return null;
     }
@@ -82,4 +85,12 @@ public class SeeAllProjectController extends BaseController {
     }
 
 
+    public void PDF(ActionEvent actionEvent) {
+        Project selectedProject = tbvProject.getSelectionModel().getSelectedItem();
+
+        if (selectedProject != null) {
+            String filePath = selectedProject.getName().trim() + ".pdf";
+            PDFGenerator.generatePDF(filePath, selectedProject);
+        }
+    }
 }

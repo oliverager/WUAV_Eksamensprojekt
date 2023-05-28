@@ -41,8 +41,9 @@ public class CreateCustomerController extends BaseController {
         else
             AlertOpener.validationError("Mangler at udfylde felter");
     }
-    private void exit() throws Exception {
-        setMainController(mainController.openSeeAllCustomerView());
+    private MainController exit() throws Exception {
+        mainController.openSeeAllCustomerView();
+        return mainController;
     }
 
     private void createCustomer() {

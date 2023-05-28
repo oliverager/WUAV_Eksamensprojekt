@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ScrollPane?>
 <Pane prefHeight="750.0" prefWidth="800.0" stylesheets="@../Css/Main_Css.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.ProjectController">
    <children>
       <Label fx:id="lblProjectName" layoutX="50.0" layoutY="50.0" styleClass="Title" text="Projekt navn" />
@@ -27,16 +28,21 @@
             <Button mnemonicParsing="false" onAction="#handlePrintDocumentation" prefHeight="36.0" styleClass="pane-button" text="Print PDF" />
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleEditProject" prefHeight="36.0" styleClass="pane-button" text="Ret Projektet" />
             <Button layoutX="110.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleDeleteProject" prefHeight="36.0" styleClass="pane-button" text="Slet Projektet" />
-            <Button layoutX="271.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleAssignTechnicians" prefHeight="36.0" styleClass="pane-button" text="Tilføj Teknikere" />
-            <Button mnemonicParsing="false" onAction="#handleRemoveTechnicians" prefHeight="36.0" styleClass="pane-button" text="Fjern Teknikere" />
          </children>
       </HBox>
-      <VBox layoutX="450.0" layoutY="50.0" prefHeight="450.0" prefWidth="300.0">
-         <children>
-            <ImageView fx:id="imgLayout" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="imgImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="imgImage1" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" />
-         </children>
-      </VBox>
+      <ScrollPane fitToWidth="true" layoutX="450.0" layoutY="50.0" prefHeight="450.0" prefWidth="300.0">
+         <content>
+            <VBox prefWidth="300.0">
+               <children>
+                  <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView2" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView3" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView4" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView5" fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
    </children>
 </Pane>

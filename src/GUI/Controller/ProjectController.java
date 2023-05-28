@@ -8,10 +8,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
 public class ProjectController extends BaseController {
+    @FXML
+    private ImageView imageView, imageView1 ,imageView2, imageView3, imageView4, imageView5;
     @FXML
     private ListView<User> lvAssignTechnician;
     @FXML
@@ -53,6 +56,7 @@ public class ProjectController extends BaseController {
 
     @FXML
     private void handlePrintDocumentation(ActionEvent actionEvent) {
+        //getModelsHandler().getSalesPersonModel().createPdf();
     }
 
     @FXML
@@ -60,14 +64,14 @@ public class ProjectController extends BaseController {
     }
 
     @FXML
-    private void handleDeleteProject(ActionEvent actionEvent) {
+    private void handleDeleteProject(ActionEvent actionEvent) throws Exception {
+        getModelsHandler().getProjectManagerModel().removeProjectFromLocal(project);
+        getModelsHandler().getAdminModel().deleteProject(project);
+        exit();
     }
 
-    @FXML
-    private void handleAssignTechnicians(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    private void handleRemoveTechnicians(ActionEvent actionEvent) {
+    private MainController exit() throws Exception {
+        mainController.openSeeAllProjectView();
+        return mainController;
     }
 }

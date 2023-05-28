@@ -69,9 +69,10 @@ public class SeeAllCustomerController extends BaseController {
         }
     }
 
-    private void checkSelectedItemType() throws Exception {
+    private MainController checkSelectedItemType() throws Exception {
         if (tbvCustomer.getSelectionModel().getSelectedItem() != null && lastSelectedItemType.equals("Customer")) {
-            setMainController(mainController.openCreateCustomerView());
+            mainController.openCreateCustomerView();
         }
+        return mainController;
     }
 }

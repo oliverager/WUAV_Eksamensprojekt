@@ -28,10 +28,6 @@ public class SalesPersonModel {
         customerObservableList.addAll(salesPersonManager.getAllCustomers());
     }
 
-    public void createPdf(Project project, ObservableList<File> files) throws Exception {
-        PDFGenerator pdfGenerator = new PDFGenerator(project, files);
-        pdfGenerator.createDocument();
-    }
 
     public List<Customer> getAllCustomers() throws Exception {
         return allCustomer;

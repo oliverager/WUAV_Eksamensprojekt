@@ -41,6 +41,10 @@ public class Project {
 
     }
 
+    public Project() {
+
+    }
+
     public int getProjectid() {
         return projectid;
     }
@@ -75,6 +79,30 @@ public class Project {
 
     public int getCustomerid() {
         return customerid;
+    }
+
+    public void setProjectid(int projectid) {
+        this.projectid = projectid;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setTechniciansid(int techniciansid) {
+        this.techniciansid = techniciansid;
+    }
+
+    public void setCustomerid(int customerid) {
+        this.customerid = customerid;
     }
 
     @Override

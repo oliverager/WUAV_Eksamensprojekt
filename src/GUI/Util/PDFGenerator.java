@@ -1,48 +1,47 @@
 package GUI.Util;
 
 import BE.Project;
+import com.itextpdf.io.exceptions.IOException;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 public class PDFGenerator {
 
-    Document document;
+    public static void generatePDF(String filePath, Project project) {
+        try (PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage();
+            document.addPage(page);
 
-    Project project;
-
-    String path = "pdfFiles/project.pdf";
-
-    List<File> files;
-
-    public PDFGenerator(Project project, List<File> files) {
-        this.project = project;
-        this.files = files;
-    }
-
-    public void createDocument() {
-        try {
-
-            PdfWriter pdfWriter = new PdfWriter(path);
-            File file = new File(path);
-            PdfDocument pdfDocument = new PdfDocument(pdfWriter);
-            pdfDocument.setDefaultPageSize(PageSize.A4);
-            document = new Document(pdfDocument);
-
-            if (!files.isEmpty()) {
-                //createImages();
+            try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+                contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+                contentStream.beginText();
+                contentStream.newLineAtOffset(50, 700);
+                contentStream.showText("Project ID: " + project.getProjectid());
+                contentStream.newLineAtOffset(0, -20);
+                contentStream.showText("Name: " + project.getName());
+                contentStream.newLineAtOffset(0, -20);
+                contentStream.showText("Date: " + project.getDate().toString());
+                contentStream.newLineAtOffset(0, -20);
+                contentStream.showText("Description: " + project.getDescription());
+                contentStream.newLineAtOffset(0, -20);
+                contentStream.showText("Technician ID: " + project.getTechniciansid());
+                contentStream.newLineAtOffset(0, -20);
+                contentStream.showText("Customer ID: " + project.getCustomerid());
+                contentStream.endText();
             }
-            document.close();
 
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            ExceptionHandler.displayError(new Exception("Kunne ikke printe dokumentation", e));
+            document.save(filePath);
+            System.out.println("PDF generated successfully!");
+        } catch (IOException e) {
+            System.out.println("Error generating PDF: " + e.getMessage());
+        } catch (java.io.IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

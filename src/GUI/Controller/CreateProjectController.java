@@ -6,6 +6,7 @@ import BE.UserType.Technician;
 import BE.UserType.User;
 import GUI.Util.AlertOpener;
 import GUI.Util.ExceptionHandler;
+import GUI.Util.ImageZipper;
 import GUI.Util.SlideshowTask;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,18 +49,44 @@ public class CreateProjectController extends BaseController{
 
     private SlideshowTask slideshowTask;
 
+    private MainController mainController;
+
+
+
     @Override
     public void setup() throws IOException {
         cbCustomer.setItems(getModelsHandler().getSalesPersonModel().getAllCustomer());
 
     }
 
-    private void createProject() { 
+    private void createProject() {
         String name = txtProjectName.getText();
         LocalDate date = txtDate.getValue();
-        Image layout = imageView.getImage();
         String description = txaDescription.getText();
+        Image layout = imageView.getImage();
         Image image = imageView1.getImage();
+        Image image2 = imageView2.getImage();
+        Image image3 = imageView3.getImage();
+        Image image4 = imageView4.getImage();
+        Image image5 = imageView5.getImage();
+
+        ArrayList<Image> images = new ArrayList<>();
+        images.add(layout);
+        images.add(image);
+        images.add(image2);
+        images.add(image3);
+        images.add(image4);
+        images.add(image5);
+
+
+        String zipFileName = txtProjectName.getText().trim() +".images.zip";
+        try {
+            ImageZipper.createImageZip(images, zipFileName);
+            System.out.println("ZIP file created successfully.");
+        } catch (IOException e) {
+            System.out.println("Error creating the ZIP file: " + e.getMessage());
+        }
+
         boolean status = false;
         int assignTechnicians = lvAssignTechnicians.getEditingIndex();
         //int customer = cbCustomer.getValue();
@@ -145,10 +172,11 @@ public class CreateProjectController extends BaseController{
 
     }
 
-    private void exit() throws Exception {
-        setMainController(mainController.openSeeAllProjectView());
+    private MainController exit() throws Exception {
+        mainController.openSeeAllProjectView();
+        return mainController;
     }
-    
+
     private void fileChooser() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select image files");
@@ -168,17 +196,36 @@ public class CreateProjectController extends BaseController{
 
     private void displayImage() {
         if (!images.isEmpty()) {
-            for (Image im : images) {
-                
+            int startIndex = currentImageIndex;
+            int endIndex = currentImageIndex + 5;
+            List<Image> displayImages = images.subList(startIndex, Math.min(endIndex, images.size()));
+
+            for (int i = 0; i < displayImages.size(); i++) {
+                Image image = displayImages.get(i);
+                switch (i) {
+                    case 0:
+                        imageView.setImage(image);
+                        break;
+                    case 1:
+                        imageView1.setImage(image);
+                        break;
+                    case 2:
+                        imageView2.setImage(image);
+                        break;
+                    case 3:
+                        imageView3.setImage(image);
+                        break;
+                    case 4:
+                        imageView4.setImage(image);
+                        break;
+                    case 5:
+                        imageView5.setImage(image);
+                        break;
+                    default:
+                        break;
+                }
             }
-
-            imageView.setImage(images.get(currentImageIndex));
-            imageView1.setImage(images.get(currentImageIndex + 1));
-            imageView2.setImage(images.get(currentImageIndex + 2));
-            imageView3.setImage(images.get(currentImageIndex + 3));
-            imageView4.setImage(images.get(currentImageIndex + 4));
-            imageView5.setImage(images.get(currentImageIndex + 5));
-
         }
     }
+
 }

@@ -59,9 +59,9 @@ public class SeeAllUserController extends BaseController {
     }
 
     public User getSelectedUser() {
-        User user = tbvUser.getSelectionModel().getSelectedItem();
-        if (user != null) {
-            return user;
+        User selectedUser = tbvUser.getSelectionModel().getSelectedItem();
+        if (selectedUser != null) {
+            return selectedUser;
         } else
             return null;
     }
@@ -73,9 +73,10 @@ public class SeeAllUserController extends BaseController {
         }
     }
 
-    private void checkSelectedItemType() throws Exception {
+    private MainController checkSelectedItemType() throws Exception {
         if (tbvUser.getSelectionModel().getSelectedItem() != null && lastSelectedItemType.equals("User")) {
-            setMainController(mainController.openCreateCustomerView());
+            mainController.openCreateCustomerView();
         }
+        return mainController;
     }
 }

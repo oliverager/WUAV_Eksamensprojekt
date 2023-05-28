@@ -18,6 +18,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
+import java.util.Objects;
 import java.util.Optional;
 
 public class MainController extends BaseController {
@@ -33,19 +35,57 @@ public class MainController extends BaseController {
     private Button btn1, btn2, btn3;
     private Alert alert;
 
-    private SeeAllCustomerController seeCustomer;
-    private SeeAllProjectController seeProject;
-    private SeeAllUserController seeUser;
 
-    public MainController() {
-        SeeAllCustomerController seeCustomer = new SeeAllCustomerController();
-        SeeAllProjectController seeProject = new SeeAllProjectController();
-        SeeAllUserController seeUser = new SeeAllUserController();
+
+/**
+    protected void openView(String viewPath, Object controllerInstance) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
+        Parent view = loader.load();
+
+        // Set the model and main controller
+        if (controllerInstance instanceof BaseController) {
+            BaseController baseController = (BaseController) controllerInstance;
+            baseController.setModel(new ModelsHandler());
+            baseController.setMainController(this);
+            baseController.setup();
+        }
+
+
+        contentArea.getChildren().clear();
+        contentArea.getChildren().add(view);
     }
 
+    protected void openCreateProjectView() throws Exception {
+        openView("/GUI/View/CreateProjectView.fxml", new CreateProjectController());
+    }
 
-    protected MainController openCreateProjectView() throws Exception {
-        MainController main = new MainController();
+    protected void openSeeAllProjectView() throws Exception {
+        openView("/GUI/View/SeeAllProjectsView.fxml", new SeeAllProjectController());
+    }
+
+    protected void openCreateUserView() throws Exception {
+        openView("/GUI/View/CreateUserView.fxml", new CreateUserController());
+    }
+
+    protected void openProjectView() throws Exception {
+        openView("/GUI/View/ProjectView.fxml", new ProjectController());
+    }
+
+    protected void openCreateCustomerView() throws Exception {
+        openView("/GUI/View/CreateCustomerView.fxml", new CreateCustomerController());
+    }
+
+    protected void openSeeAllUserView() throws Exception {
+        openView("/GUI/View/SeeAllUserView.fxml", new SeeAllUserController());
+    }
+
+    protected void openSeeAllCustomerView() throws Exception {
+        openView("/GUI/View/SeeAllCustomerView.fxml", new SeeAllCustomerController());
+    }
+    */
+
+
+    protected void openCreateProjectView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateProjectView.fxml"));
         Parent view = loader.load();
 
@@ -54,12 +94,10 @@ public class MainController extends BaseController {
         controller.setMainController(this);
         controller.setup();
 
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(view);
-        return main;
+        contentArea.getChildren().clear();
+        contentArea.getChildren().add(view);
     }
-    protected MainController openSeeAllProjectView() throws Exception {
-        MainController main = new MainController();
+    protected void openSeeAllProjectView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/SeeAllProjectsView.fxml"));
         Parent view = loader.load();
 
@@ -68,12 +106,11 @@ public class MainController extends BaseController {
         controller.setMainController(this);
         controller.setup();
 
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(view);
-        return main;
+        contentArea.getChildren().clear();
+        contentArea.getChildren().add(view);
+
     }
-    protected MainController openCreateUserView() throws Exception {
-        MainController main = new MainController();
+    protected void openCreateUserView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateUserView.fxml"));
         Parent view = loader.load();
 
@@ -81,15 +118,13 @@ public class MainController extends BaseController {
         controller.setModel(new ModelsHandler());
         controller.setMainController(this);
 
-        //controller.setOpenedUser(seeUser.getSelectedUser());
+        controller.setOpenedUser(user);
         controller.setup();
 
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(view);
-        return main;
+        contentArea.getChildren().clear();
+        contentArea.getChildren().add(view);
     }
-    protected MainController openProjectView() throws Exception {
-        MainController main = new MainController();
+    protected void openProjectView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/ProjectView.fxml"));
         Parent view = loader.load();
 
@@ -97,15 +132,13 @@ public class MainController extends BaseController {
         controller.setModel(new ModelsHandler());
         controller.setMainController(this);
 
-        controller.setOpenedProject(seeProject.getSelectedProject());
+        controller.setOpenedProject(project);
         controller.setup();
 
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(view);
-        return main;
+        contentArea.getChildren().clear();
+        contentArea.getChildren().add(view);
     }
-    protected MainController openCreateCustomerView() throws Exception {
-        MainController main = new MainController();
+    protected void openCreateCustomerView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateCustomerView.fxml"));
         Parent view = loader.load();
 
@@ -114,16 +147,14 @@ public class MainController extends BaseController {
         controller.setMainController(this);
 
 
-        //controller.setOpenedCustomer(seeCustomer.getSelectedCustomer());
+        controller.setOpenedCustomer(customer);
         controller.setup();
 
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(view);
-        return main;
+        contentArea.getChildren().clear();
+        contentArea.getChildren().add(view);
     }
 
-    protected MainController openSeeAllUserView() throws Exception {
-        MainController main = new MainController();
+    protected void openSeeAllUserView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/SeeAllUserView.fxml"));
         Parent view = loader.load();
 
@@ -132,12 +163,11 @@ public class MainController extends BaseController {
         controller.setMainController(this);
         controller.setup();
 
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(view);
-        return main;
+        contentArea.getChildren().clear();
+        contentArea.getChildren().add(view);
+
     }
-    protected MainController openSeeAllCustomerView() throws Exception {
-        MainController main = new MainController();
+    protected void openSeeAllCustomerView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/SeeAllCustomerView.fxml"));
         Parent view = loader.load();
 
@@ -146,9 +176,8 @@ public class MainController extends BaseController {
         controller.setMainController(this);
         controller.setup();
 
-        contentArea.getChildren().removeAll();
-        contentArea.getChildren().setAll(view);
-        return main;
+        contentArea.getChildren().clear();
+        contentArea.getChildren().add(view);
     }
     @FXML
     public void handleButton1(ActionEvent event) {
@@ -225,6 +254,7 @@ public class MainController extends BaseController {
                 stage1.setScene(scene);
                 stage1.show();
 
+                contentArea.getChildren().clear();
                 Stage stage = (Stage) btnLogOut.getScene().getWindow();
                 stage.close();
             }

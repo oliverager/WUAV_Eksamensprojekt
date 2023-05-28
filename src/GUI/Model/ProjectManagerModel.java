@@ -83,4 +83,8 @@ public class ProjectManagerModel {
         projectObservableList.clear();
         projectObservableList.addAll(allProjects);
     }
+
+    public void removeProjectFromLocal(Project project) {
+        projectObservableList.remove(project);
+    }
 }
