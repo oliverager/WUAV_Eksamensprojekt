@@ -92,7 +92,8 @@ public class SeeAllUserController extends BaseController {
 
     private MainController checkSelectedItemType() throws Exception {
         if (tbvUser.getSelectionModel().getSelectedItem() != null && lastSelectedItemType.equals("User")) {
-            mainController.openCreateCustomerView();
+            System.out.println(getSelectedUser().getUserName());
+            mainController.openUserView();
         }
         return mainController;
     }

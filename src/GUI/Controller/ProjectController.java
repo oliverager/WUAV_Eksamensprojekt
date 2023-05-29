@@ -55,7 +55,7 @@ public class ProjectController extends BaseController {
 
                 int customerId = project.getCustomerid();
                 try {
-                    Customer customer = getModelsHandler().getSalesPersonModel().getCustomerById(project.getCustomerid());
+                    Customer customer = getModelsHandler().getSalesPersonModel().getCustomerById(customerId);
                     if (customer != null) {
                         lblCustomerName.setText(customer.getName());
                     } else {

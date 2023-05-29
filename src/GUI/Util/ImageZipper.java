@@ -1,9 +1,11 @@
 package GUI.Util;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -11,8 +13,9 @@ import java.util.zip.ZipOutputStream;
 public class ImageZipper {
     public static void createImageZip(ArrayList<Image> images, String zipFileName) throws IOException {
         byte[] buffer = new byte[1024];
+        String resultFolderPath = "result";
 
-        try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFileName))) {
+        try (ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(resultFolderPath + "/" + zipFileName))) {
             for (int i = 0; i < images.size(); i++) {
                 Image image = images.get(i);
                 String entryName = "image_" + i + ".png";
@@ -29,16 +32,15 @@ public class ImageZipper {
     }
 
     private static byte[] getImageData(Image image) {
-        // Implement the logic to get the image data from the Image object
-        // and return it as a byte array.
-        // This implementation depends on how you obtain the image data in your specific scenario.
-        // Replace this with your own implementation.
-
-        // Example implementation:
-        // Assuming Image class has a method "getData()" that returns the image data as a byte array.
-        return null; //image.getData();
+        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(bufferedImage, "png", byteArrayOutputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return byteArrayOutputStream.toByteArray();
     }
-
-
 }
 

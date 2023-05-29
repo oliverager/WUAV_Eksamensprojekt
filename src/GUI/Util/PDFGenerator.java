@@ -15,7 +15,9 @@ import java.util.List;
 
 public class PDFGenerator {
 
-    public static void generatePDF(String filePath, Project project) {
+    public static void generatePDF(String folderPath, String fileName, Project project) {
+        String filePath = folderPath + File.separator + fileName;
+
         try (PDDocument document = new PDDocument()) {
             PDPage page = new PDPage(PDRectangle.A4); // Set page size to A4
             document.addPage(page);
@@ -87,5 +89,4 @@ public class PDFGenerator {
 
         return lines;
     }
-
 }

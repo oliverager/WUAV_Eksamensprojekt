@@ -62,31 +62,12 @@ public class CreateProjectController extends BaseController{
         LocalDate date = txtDate.getValue();
         String description = txaDescription.getText();
         boolean status = false;
-        /**
-        Image layout = imageView.getImage();
-        Image image = imageView1.getImage();
-        Image image2 = imageView2.getImage();
-        Image image3 = imageView3.getImage();
-        Image image4 = imageView4.getImage();
-        Image image5 = imageView5.getImage();
-
-        ArrayList<Image> images = new ArrayList<>();
-        images.add(layout);
-        images.add(image);
-        images.add(image2);
-        images.add(image3);
-        images.add(image4);
-        images.add(image5);
-
-
-        String zipFileName = txtProjectName.getText().trim() +".images.zip";
+        ImageZipper zipper = new ImageZipper();
         try {
-            ImageZipper.createImageZip(images, zipFileName);
-            System.out.println("ZIP file created successfully.");
+            zipper.createImageZip((ArrayList<Image>) images, txtProjectName.getText().trim() + ".zip");
         } catch (IOException e) {
-            System.out.println("Error creating the ZIP file: " + e.getMessage());
+            ExceptionHandler.displayError(new Exception("", e));
         }
-        */
 
         String layout = null;
         String image = null;

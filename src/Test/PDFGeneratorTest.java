@@ -11,15 +11,14 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class PDFGeneratorTest {
 
     @Test
     @DisplayName("testGeneratePDF")
     public void testGeneratePDF() {
         // Define test data
-        String filePath = "junitTest.pdf";
+        String folderPath = "result";
+        String fileName = "junitTest.pdf";
         Project project = new Project();
         project.setProjectid(1);
         project.setName("Test Project");
@@ -29,13 +28,14 @@ public class PDFGeneratorTest {
         project.setCustomerid(456);
 
         // Generate the PDF
-        PDFGenerator.generatePDF(filePath, project);
+        PDFGenerator.generatePDF(folderPath, fileName, project);
 
         // Verify if the PDF file is created
-        File file = new File(filePath);
+        File file = new File(folderPath, fileName);
         assertTrue(file.exists());
 
         // Clean up - delete the generated PDF file
         file.delete();
     }
 }
+

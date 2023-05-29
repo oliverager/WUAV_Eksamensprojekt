@@ -41,6 +41,7 @@ public class SeeAllProjectController extends BaseController {
     @Override
     public void setup() {
 
+
         tbcId.setCellValueFactory(new PropertyValueFactory<Project, Integer>("projectid"));
         tbcName.setCellValueFactory(new PropertyValueFactory<Project, String>("name"));
         tbcCustomer.setCellValueFactory(cellData -> {
@@ -106,8 +107,9 @@ public class SeeAllProjectController extends BaseController {
         Project selectedProject = tbvProject.getSelectionModel().getSelectedItem();
 
         if (selectedProject != null) {
-            String filePath = selectedProject.getName().trim() + ".pdf";
-            PDFGenerator.generatePDF(filePath, selectedProject);
+            String folderPath = "result";
+            String fileName = selectedProject.getName() + ".pdf";
+            PDFGenerator.generatePDF(folderPath, fileName, selectedProject);
         }
     }
 }

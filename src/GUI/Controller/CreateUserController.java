@@ -224,16 +224,7 @@ public class CreateUserController extends BaseController {
 
     @FXML
     private void handleDeleteUser(ActionEvent actionEvent) {
-        if (selectedUser != null) {
-            try {
-                for (Project p: getModelsHandler().getProjectManagerModel().getProjectObservableList()) {
 
-                }
-                getModelsHandler().getAdminModel().deleteUser(selectedUser);
-            } catch (Exception e) {
-                ExceptionHandler.displayError(new Exception("Kunne ikke slet Bruger", e));
-            }
-        }
     }
 
     @FXML
