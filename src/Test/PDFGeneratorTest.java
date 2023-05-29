@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,13 +19,13 @@ public class PDFGeneratorTest {
     @DisplayName("testGeneratePDF")
     public void testGeneratePDF() {
         // Define test data
-        String filePath = "test.pdf";
+        String filePath = "junitTest.pdf";
         Project project = new Project();
         project.setProjectid(1);
         project.setName("Test Project");
         project.setDate(LocalDate.now());
         project.setDescription("Test description");
-        project.setTechniciansid(123);
+        project.setTechniciansIds(Arrays.asList(1, 2, 3));
         project.setCustomerid(456);
 
         // Generate the PDF

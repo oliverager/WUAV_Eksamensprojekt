@@ -12,6 +12,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProjectManagerDAO_DB implements IProjectManagerDAO {
 
@@ -40,10 +41,18 @@ public class ProjectManagerDAO_DB implements IProjectManagerDAO {
                 String description = rs.getString("Description");
                 String images = rs.getString("Image");
                 boolean status = rs.getBoolean("Status");
-                int techniciansid = rs.getInt("Assign_Technicians_Id");
+                String techniciansIds = rs.getString("Assign_Technicians_Id");
                 int customerid = rs.getInt("Customer_Id");
 
-                Project project = new Project(id, name, date, layout, description, images, status, techniciansid, customerid);
+                List<Integer> technicianIdsList = new ArrayList<>();
+                if (techniciansIds != null) {
+                    String[] technicianIdsArray = techniciansIds.split(",");
+                    for (String technicianId : technicianIdsArray) {
+                        technicianIdsList.add(Integer.parseInt(technicianId));
+                    }
+                }
+
+                Project project = new Project(id, name, date, layout, description, images, status, technicianIdsList, customerid);
                 allProjects.add(project);
             }
             return allProjects;
@@ -65,7 +74,7 @@ public class ProjectManagerDAO_DB implements IProjectManagerDAO {
             statement.setString(3, project.getLayout());
             statement.setString(4, project.getDescription());
             statement.setString(5, project.getImages());
-            statement.setInt(6, project.getTechniciansid());
+            statement.setString(6, String.join(",", project.getTechniciansIds().stream().map(String::valueOf).collect(Collectors.toList())));
             statement.setInt(7, project.getCustomerid());
             statement.executeUpdate();
 
@@ -77,7 +86,7 @@ public class ProjectManagerDAO_DB implements IProjectManagerDAO {
             }
 
             Project project1 = new Project(id, project.getName(), project.getDate(), project.getLayout(),
-                    project.getDescription(), project.getImages(), project.isStatus(), project.getTechniciansid(), project.getCustomerid());
+                    project.getDescription(), project.getImages(), project.isStatus(), project.getTechniciansIds(), project.getCustomerid());
             return project1;
         }
         catch (SQLException e) {
@@ -97,7 +106,7 @@ public class ProjectManagerDAO_DB implements IProjectManagerDAO {
             statement.setString(3, project.getLayout());
             statement.setString(4, project.getDescription());
             statement.setString(5, project.getImages());
-            statement.setInt(6, project.getTechniciansid());
+            statement.setString(6, String.join(",", project.getTechniciansIds().stream().map(String::valueOf).collect(Collectors.toList())));
             statement.setInt(7, project.getCustomerid());
             statement.setInt(8, project.getProjectid());
 

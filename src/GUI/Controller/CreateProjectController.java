@@ -30,7 +30,7 @@ import java.util.List;
 
 public class CreateProjectController extends BaseController{
     @FXML
-    private ListView<Technician> lvAssignTechnicians;
+    private ListView<User> lvAssignTechnicians;
     @FXML
     private Button assignTechnicians;
     @FXML
@@ -63,6 +63,8 @@ public class CreateProjectController extends BaseController{
         String name = txtProjectName.getText();
         LocalDate date = txtDate.getValue();
         String description = txaDescription.getText();
+        boolean status = false;
+        /**
         Image layout = imageView.getImage();
         Image image = imageView1.getImage();
         Image image2 = imageView2.getImage();
@@ -86,17 +88,39 @@ public class CreateProjectController extends BaseController{
         } catch (IOException e) {
             System.out.println("Error creating the ZIP file: " + e.getMessage());
         }
+        */
 
-        boolean status = false;
-        int assignTechnicians = lvAssignTechnicians.getEditingIndex();
-        //int customer = cbCustomer.getValue();
+        String layout = null;
+        String image = null;
+
+        ObservableList<User> technicians = lvAssignTechnicians.getItems();
+        List<Integer> technicianIds = new ArrayList<>();
+
+        // Retrieve technician IDs
+        for (User user : technicians) {
+            if (user instanceof Technician) {
+                Technician technician = (Technician) user;
+                int technicianId = user.getUserId();
+                technicianIds.add(technicianId);
+            }
+        }
+
+        // Assign default technician ID if the list is empty
+        int defaultTechnicianId = 0;
+        if (technicianIds.isEmpty()) {
+            technicianIds.add(defaultTechnicianId);
+        }
+
+        // Retrieve the selected customer ID
+        Customer customer = cbCustomer.getValue();
+        int customerId = customer.getCustomerid();
 
 
         Project newProject = null;
         Technician newTechnician = null;
 
         try {
-            //newProject = new Project(name, date, layout, description, image, status, assignTechnicians, customer);
+            newProject = new Project(name, date, layout, description, image, status, technicianIds, customerId);
             newTechnician = getModelsHandler().getLoginModel().getLoggedInTechnician();
 
             getModelsHandler().getProjectManagerModel().createProject(newProject, newTechnician);

@@ -1,9 +1,7 @@
 package BE;
 
-import javafx.scene.image.Image;
-
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Project {
 
@@ -14,10 +12,10 @@ public class Project {
     private String description;
     private String Images;
     private boolean status;
-    private int techniciansid;
+    private List<Integer> techniciansIds;
     private int customerid;
 
-    public Project(int projectid, String name, LocalDate date, String layout, String description, String images, boolean status, int techniciansid, int customerid) {
+    public Project(int projectid, String name, LocalDate date, String layout, String description, String images, boolean status, List<Integer> techniciansid, int customerid) {
         this.projectid = projectid;
         this.name = name;
         this.date = date;
@@ -25,18 +23,18 @@ public class Project {
         this.description = description;
         this.Images = images;
         this.status = status;
-        this.techniciansid = techniciansid;
+        this.techniciansIds = techniciansid;
         this.customerid = customerid;
     }
 
-    public Project(String name, LocalDate date, String layout, String description, String images, boolean status, int techniciansid, int customerid) {
+    public Project(String name, LocalDate date, String layout, String description, String images, boolean status, List<Integer> techniciansid, int customerid) {
         this.name = name;
         this.date = date;
         this.layout = layout;
         this.description = description;
         this.Images = images;
         this.status = status;
-        this.techniciansid = techniciansid;
+        this.techniciansIds = techniciansid;
         this.customerid = customerid;
 
     }
@@ -73,8 +71,8 @@ public class Project {
         return status;
     }
 
-    public int getTechniciansid() {
-        return techniciansid;
+    public List<Integer> getTechniciansIds() {
+        return techniciansIds;
     }
 
     public int getCustomerid() {
@@ -97,8 +95,8 @@ public class Project {
         this.description = description;
     }
 
-    public void setTechniciansid(int techniciansid) {
-        this.techniciansid = techniciansid;
+    public void setTechniciansIds(List<Integer> techniciansIds) {
+        this.techniciansIds = techniciansIds;
     }
 
     public void setCustomerid(int customerid) {
@@ -113,7 +111,7 @@ public class Project {
                 ", layout='" + layout + '\'' +
                 ", description='" + description + '\'' +
                 ", Images='" + Images + '\'' +
-                ", techniciansid=" + techniciansid +
+                ", techniciansid=" + techniciansIds +
                 ", customerid=" + customerid +
                 '}';
     }
