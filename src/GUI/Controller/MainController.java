@@ -2,6 +2,7 @@ package GUI.Controller;
 
 import BE.Customer.Customer;
 import BE.Customer.Private;
+import BE.Project;
 import BE.UserType.User;
 import GUI.Model.ModelsHandler;
 import GUI.Util.ExceptionHandler;
@@ -132,11 +133,19 @@ public class MainController extends BaseController {
         controller.setModel(new ModelsHandler());
         controller.setMainController(this);
 
-        controller.setOpenedProject(project);
-        controller.setup();
+        // Retrieve the selected project from SeeAllProjectController
+        SeeAllProjectController seeAllProjectController = new SeeAllProjectController();
+        Project selectedProject = seeAllProjectController.getSelectedProject();
 
-        contentArea.getChildren().clear();
-        contentArea.getChildren().add(view);
+        if (selectedProject != null) {
+            controller.setOpenedProject(selectedProject);
+            controller.setup();
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(view);
+        } else {
+            ExceptionHandler.displayError(new Exception(""));
+        }
     }
     protected void openCreateCustomerView() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUI/View/CreateCustomerView.fxml"));

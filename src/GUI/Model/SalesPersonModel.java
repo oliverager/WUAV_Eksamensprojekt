@@ -1,6 +1,7 @@
 package GUI.Model;
 
 import BE.Customer.Customer;
+import BE.Customer.CustomerType;
 import BE.Project;
 import BE.UserType.SalesPerson;
 import BLL.Interfaces.ISalesPersonManager;
@@ -31,6 +32,14 @@ public class SalesPersonModel {
 
     public List<Customer> getAllCustomers() throws Exception {
         return allCustomer;
+    }
+
+    public Customer getCustomerById(int customerId) throws Exception {
+        return salesPersonManager.getCustomerById(customerId);
+    }
+
+    public CustomerType getCustomerTypeById(int typeId) throws Exception {
+        return salesPersonManager.getCustomerTypeById(typeId);
     }
 
     public void createCustomer(Customer customer) throws Exception {

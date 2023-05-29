@@ -2,6 +2,9 @@ package GUI.Controller;
 
 import BE.Project;
 import BE.UserType.User;
+import BE.UserType.UserType;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
@@ -24,7 +27,7 @@ public class SeeAllUserController extends BaseController {
     @FXML
     private TableColumn<User, String> tbcName;
     @FXML
-    private TableColumn<User, Integer> tbcUserType;
+    private TableColumn<User, String> tbcUserType;
     private String lastSelectedItemType;
 
     @FXML
@@ -44,7 +47,21 @@ public class SeeAllUserController extends BaseController {
 
         tbcId.setCellValueFactory(new PropertyValueFactory<User, Integer>("userId"));
         tbcName.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
-        tbcUserType.setCellValueFactory(new PropertyValueFactory<User, Integer>("userType"));
+        tbcUserType.setCellValueFactory(cellData -> {
+            StringProperty userType = new SimpleStringProperty();
+            int userTypeId = cellData.getValue().getUserType();
+
+            try {
+                UserType type = getModelsHandler().getAdminModel().getUserTypeById(userTypeId);
+                if (type != null) {
+                    userType.set(type.getUserTypeName());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return userType;
+        });
 
         tbvUser.setItems(getModelsHandler().getAdminModel().getUserObservableList());
     }

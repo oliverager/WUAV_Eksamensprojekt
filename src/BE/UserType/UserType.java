@@ -1,16 +1,16 @@
 package BE.UserType;
 
 public class UserType {
-    private int userType;
+    private int userTypeId;
     private String userTypeName;
 
     public UserType(int userType, String userTypeName) {
-        this.userType = userType;
+        this.userTypeId = userType;
         this.userTypeName = userTypeName;
     }
 
-    public int getUserType() {
-        return userType;
+    public int getUserTypeId() {
+        return userTypeId;
     }
 
     public String getUserTypeName() {

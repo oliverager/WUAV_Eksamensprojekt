@@ -1,9 +1,6 @@
 package DAL.DB;
 
-import BE.Customer.Business;
-import BE.Customer.Private;
-import BE.Customer.Government;
-import BE.Customer.Customer;
+import BE.Customer.*;
 import BE.Project;
 import BE.UserType.User;
 import DAL.DatabaseConnector;
@@ -51,6 +48,56 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
 
         }
     }
+    @Override
+    public Customer getCustomerById(int customerId) throws Exception {
+        String sql = "SELECT * FROM [Customer] WHERE Id = ?;";
+
+        try (Connection connection = dbConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, customerId);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("Id");
+                String name = rs.getString("Name");
+                String cvr = rs.getString("Cvr");
+                String address = rs.getString("Adress");
+                int customerType = rs.getInt("CustomerType");
+
+                return new Customer(id, name, address, cvr, customerType);
+            } else {
+                throw new Exception("Customer with ID " + customerId + " not found.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error retrieving customer from database", e);
+        }
+    }
+    @Override
+    public CustomerType getCustomerTypeById(int Id) throws Exception {
+        String sql = "SELECT * FROM CustomerType WHERE Id = ?";
+
+        try (Connection connection = dbConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, Id);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("Id");
+                String name = rs.getString("Type");
+
+                return new CustomerType(id, name);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error retrieving customer type from the database", e);
+        }
+
+        return null; // Customer type not found
+    }
+
+
 
     @Override
     public Customer createCustomer(Customer customer) throws Exception {
@@ -111,8 +158,19 @@ public class SalesPersonDAO_DB implements ISalesPersonDAO {
 
     @Override
     public void deleteCustomer(Customer customer) throws Exception {
-        //TODO deleteCustomer
+        String sql = "DELETE FROM [Customer] WHERE Id = ?;";
+
+        try (Connection connection = dbConnector.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+
+        statement.setInt(1, customer.getCustomerid());
+        statement.executeUpdate();
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        throw new Exception("Could not delete customer from database", e);
     }
+}
 
 
 }

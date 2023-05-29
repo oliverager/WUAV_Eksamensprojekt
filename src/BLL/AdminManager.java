@@ -38,6 +38,11 @@ public class AdminManager implements IAdminManager {
     }
 
     @Override
+    public UserType getUserTypeById(int byId) throws Exception {
+        return databaseAcces.getUserTypeById(byId);
+    }
+
+    @Override
     public void updateUser(User user) throws Exception {
         databaseAcces.updateUser(user);
     }

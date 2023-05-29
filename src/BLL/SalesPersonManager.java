@@ -1,6 +1,7 @@
 package BLL;
 
 import BE.Customer.Customer;
+import BE.Customer.CustomerType;
 import BE.Project;
 import BLL.Interfaces.ISalesPersonManager;
 import DAL.DB.SalesPersonDAO_DB;
@@ -19,6 +20,15 @@ public class SalesPersonManager implements ISalesPersonManager {
     @Override
     public List<Customer> getAllCustomers() throws Exception {
         return databaseAcces.getAllCustomers();
+    }
+    @Override
+    public Customer getCustomerById(int customerId) throws Exception {
+        return databaseAcces.getCustomerById(customerId);
+    }
+
+    @Override
+    public CustomerType getCustomerTypeById(int typeId) throws Exception {
+        return databaseAcces.getCustomerTypeById(typeId);
     }
 
     @Override

@@ -156,6 +156,30 @@ public class AdminDAO_DB implements IAdminDAO {
             throw new Exception("Failed to retrieve UserTypes", e);
         }
     }
+    @Override
+    public UserType getUserTypeById(int Id) throws Exception {
+        String sql = "SELECT * FROM UserType WHERE Id = ?";
+
+        try (Connection connection = dbConnector.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, Id);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("Id");
+                String name = rs.getString("Type");
+                // Retrieve other user attributes as needed
+
+                return new UserType(id, name);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error retrieving user from the database", e);
+        }
+
+        return null; // User not found
+    }
+
 
     @Override
     public void updateUser(User user) throws Exception {

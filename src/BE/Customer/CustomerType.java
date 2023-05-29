@@ -13,7 +13,7 @@ public class CustomerType {
         return usertype;
     }
 
-    public String getUsertypeName() {
+    public String getUserTypeName() {
         return usertypeName;
     }
 }

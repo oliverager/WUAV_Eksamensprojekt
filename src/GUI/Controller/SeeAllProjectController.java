@@ -1,8 +1,11 @@
 package GUI.Controller;
 
+import BE.Customer.Customer;
 import BE.Project;
 import GUI.Model.ModelsHandler;
 import GUI.Util.PDFGenerator;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +43,21 @@ public class SeeAllProjectController extends BaseController {
 
         tbcId.setCellValueFactory(new PropertyValueFactory<Project, Integer>("projectid"));
         tbcName.setCellValueFactory(new PropertyValueFactory<Project, String>("name"));
-        tbcCustomer.setCellValueFactory(new PropertyValueFactory<Project, String>("customerid"));
+        tbcCustomer.setCellValueFactory(cellData -> {
+            StringProperty customerName = new SimpleStringProperty();
+            int customerId = cellData.getValue().getCustomerid();
+
+            try {
+                Customer customer = getModelsHandler().getSalesPersonModel().getCustomerById(customerId);
+                if (customer != null) {
+                    customerName.set(customer.getName());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return customerName;
+        });
         tbcDate.setCellValueFactory(new PropertyValueFactory<Project, LocalDate>("date"));
         tbcActive.setCellValueFactory(new PropertyValueFactory<Project, String>("status"));
 

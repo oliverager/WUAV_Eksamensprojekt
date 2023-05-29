@@ -1,7 +1,10 @@
 package GUI.Controller;
 
 import BE.Customer.Customer;
+import BE.Customer.CustomerType;
 import BE.UserType.User;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -34,8 +37,21 @@ public class SeeAllCustomerController extends BaseController {
         tbcId.setCellValueFactory(new PropertyValueFactory<Customer, Integer>("customerid"));
         tbcName.setCellValueFactory(new PropertyValueFactory<Customer, String>("name"));
         tbcCVR.setCellValueFactory(new PropertyValueFactory<Customer, Double>("cvrNummer"));
-        tbcCustomerType.setCellValueFactory(new PropertyValueFactory<Customer, String>("customertype"));
+        tbcCustomerType.setCellValueFactory(cellData -> {
+            StringProperty customerTypeName = new SimpleStringProperty();
+            int customerTypeId = cellData.getValue().getCustomertype();
 
+            try {
+                CustomerType customerType = getModelsHandler().getSalesPersonModel().getCustomerTypeById(customerTypeId);
+                if (customerType != null) {
+                    customerTypeName.set(customerType.getUserTypeName());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return customerTypeName;
+        });
         tbvCustomer.setItems(getModelsHandler().getSalesPersonModel().getAllCustomer());
 
     }

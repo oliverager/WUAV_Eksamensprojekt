@@ -96,6 +96,11 @@ public class AdminModel {
     public List<UserType> getAllUserTypes() throws Exception{
         return adminManager.getAllUserTypes();
     }
+
+    public UserType getUserTypeById(int byId) throws Exception {
+        return adminManager.getUserTypeById(byId);
+    }
+
     public void deleteProject(Project project) throws Exception {
         adminManager.deleteProjectRelations(project);
     }
