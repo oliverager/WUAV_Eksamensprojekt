@@ -119,8 +119,13 @@ public class MainController extends BaseController {
         controller.setModel(new ModelsHandler());
         controller.setMainController(this);
 
-        controller.setOpenedUser(user);
-        controller.setup();
+        SeeAllUserController seeAllUserController = new SeeAllUserController();
+        User selectedUser = seeAllUserController.getSelectedUser();
+
+        if (selectedUser != null) {
+            controller.setOpenedUser(selectedUser);
+            controller.setup();
+        }
 
         contentArea.getChildren().clear();
         contentArea.getChildren().add(view);
@@ -155,9 +160,13 @@ public class MainController extends BaseController {
         controller.setModel(new ModelsHandler());
         controller.setMainController(this);
 
+        SeeAllCustomerController seeAllCustomerController = new SeeAllCustomerController();
+        Customer selectedCustomer = seeAllCustomerController.getSelectedCustomer();
 
-        controller.setOpenedCustomer(customer);
-        controller.setup();
+        if (selectedCustomer != null) {
+            controller.setOpenedCustomer(selectedCustomer);
+            controller.setup();
+        }
 
         contentArea.getChildren().clear();
         contentArea.getChildren().add(view);

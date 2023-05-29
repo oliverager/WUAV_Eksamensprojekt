@@ -27,6 +27,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="itextpdf.layout" level="project" />
-    <orderEntry type="library" name="apache.pdfbox" level="project" />
+    <orderEntry type="library" name="apache.pdfbox" level="application" />
+    <orderEntry type="library" name="itextpdf.io" level="application" />
   </component>
 </module>

@@ -49,8 +49,6 @@ public class CreateProjectController extends BaseController{
 
     private SlideshowTask slideshowTask;
 
-    private MainController mainController;
-
 
 
     @Override
@@ -124,8 +122,9 @@ public class CreateProjectController extends BaseController{
             newTechnician = getModelsHandler().getLoginModel().getLoggedInTechnician();
 
             getModelsHandler().getProjectManagerModel().createProject(newProject, newTechnician);
+            System.out.println("Project generated successfully!");
         } catch (Exception e) {
-            ExceptionHandler.displayError(new Exception("", e));
+            ExceptionHandler.displayError(new Exception("Kunne ikke oprette det nye projekt", e));
         }
     }
 
